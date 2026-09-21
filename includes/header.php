@@ -18,6 +18,11 @@ $aktualis  = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: 
     <?php endif; ?>
 </head>
 <body>
+    <header class="fejlec">
+
+        <img src="assets/fejlec/fejlec.jpg" alt="Szalézi Ágazati Képzőközpont">
+
+    </header>
 
 <nav>
     <?php menu_kirajzol(menu_adatok(), $aktualis); ?>
