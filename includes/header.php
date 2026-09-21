@@ -13,6 +13,9 @@ $aktualis  = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($oldalCim) ?></title>
     <link rel="stylesheet" href="assets/style.css">
+    <?php if (!empty($oldalCss)): ?>
+    <link rel="stylesheet" href="<?= e($oldalCss) ?>">
+    <?php endif; ?>
 </head>
 <body>
 

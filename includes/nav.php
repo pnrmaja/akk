@@ -22,8 +22,8 @@ function menu_adatok(): array
         ['label' => 'Képzéseink', 'children' => [
             ['label' => 'Szakmáink', 'href' => 'szakmaink.php', 'children' => $szakmaGyerekek],
         ]],
-        ['label' => 'Duális képzés', 'children' => [
-            ['label' => 'A duális képzésről', 'href' => '#'],
+        ['label' => 'Duális képzés', 'href' => 'dualisKepzes.php', 'children' => [
+            ['label' => 'A duális képzésről', 'href' => 'dualisKepzes.php'],
             ['label' => 'Partnervállalatok',  'href' => '#'],
             ['label' => 'Munkaszerződés',     'href' => '#'],
         ]],
