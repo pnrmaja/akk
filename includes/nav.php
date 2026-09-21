@@ -17,7 +17,7 @@ function menu_adatok(): array
         ['label' => 'Rólunk', 'children' => [
             ['label' => 'Bemutatkozás',    'href' => 'bemutatkozas.php'],
             ['label' => 'Képzőközpontunk', 'href' => '#'],
-            ['label' => 'Partnereink',     'href' => '#'],
+            ['label' => 'Partnereink',     'href' => 'partnereink.php'],
         ]],
         ['label' => 'Képzéseink', 'children' => [
             ['label' => 'Szakmáink', 'href' => 'szakmaink.php', 'children' => $szakmaGyerekek],
