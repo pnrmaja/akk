@@ -16,17 +16,18 @@ function menu_adatok(): array
         ['label' => 'Főoldal', 'href' => 'index.php'],
         ['label' => 'Rólunk', 'children' => [
             ['label' => 'Bemutatkozás',    'href' => 'bemutatkozas.php'],
+            ['label' => 'Duális képzés',     'href' => 'dualisKepzes.php'],
             ['label' => 'Képzőközpontunk', 'href' => '#'],
-            ['label' => 'Partnereink',     'href' => 'partnereink.php'],
+            
         ]],
         ['label' => 'Képzéseink', 'children' => [
             ['label' => 'Szakmáink', 'href' => 'szakmaink.php', 'children' => $szakmaGyerekek],
         ]],
-        ['label' => 'Duális képzés', 'href' => 'dualisKepzes.php', 'children' => [
-            ['label' => 'A duális képzésről', 'href' => 'dualisKepzes.php'],
-            ['label' => 'Partnervállalatok',  'href' => '#'],
-            ['label' => 'Munkaszerződés',     'href' => '#'],
-        ]],
+        ['label' => 'Partnereink', 'href' => 'partnereink.php'],
+        ['label' => 'Híreink', 'href' => 'hireink.php'],
+
+        ['label' => 'Galéria', 'href' => 'galeria.php'],
+
         ['label' => 'Kapcsolat', 'href' => '#'],
     ];
 }
