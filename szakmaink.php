@@ -7,18 +7,38 @@ if (!is_string($varos) || !in_array($varos, varosok(), true)) {
     $varos = null;
 }
 
-$lista    = szurt_kepzesek($varos);
-$oldalCim = 'Szakmáink' . ($varos ? ' – ' . $varos : '') . ' – Szalézi AKK';
+// Csak létező jogviszony-típusra szűrünk; ismeretlen érték → minden képzés.
+$jogviszonyTipusok = jogviszony_tipusok();
+$jogviszony = $_GET['jogviszony'] ?? null;
+if (!is_string($jogviszony) || !array_key_exists($jogviszony, $jogviszonyTipusok)) {
+    $jogviszony = null;
+}
+
+$lista = szurt_kepzesek($varos, $jogviszony);
+
+$cimReszek = array_filter([$varos, $jogviszony ? $jogviszonyTipusok[$jogviszony] : null]);
+$oldalCim  = 'Szakmáink' . ($cimReszek ? ' – ' . implode(', ', $cimReszek) : '') . ' – Szalézi AKK';
+
 require __DIR__ . '/includes/header.php';
 ?>
 
     <h1>Szakmáink</h1>
 
     <div class="varos-nav">
-        <a href="szakmaink.php" class="<?= $varos === null ? 'aktiv' : '' ?>">Összes</a>
+        <a href="<?= e(szakma_szuro_url(null, $jogviszony)) ?>"
+           class="<?= $varos === null ? 'aktiv' : '' ?>">Összes település</a>
         <?php foreach (varosok() as $v): ?>
-            <a href="szakmaink.php?varos=<?= e(rawurlencode($v)) ?>"
+            <a href="<?= e(szakma_szuro_url($v, $jogviszony)) ?>"
                class="<?= $v === $varos ? 'aktiv' : '' ?>"><?= e($v) ?></a>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="varos-nav">
+        <a href="<?= e(szakma_szuro_url($varos, null)) ?>"
+           class="<?= $jogviszony === null ? 'aktiv' : '' ?>">Összes jogviszony</a>
+        <?php foreach ($jogviszonyTipusok as $kulcs => $cimke): ?>
+            <a href="<?= e(szakma_szuro_url($varos, $kulcs)) ?>"
+               class="<?= $kulcs === $jogviszony ? 'aktiv' : '' ?>"><?= e($cimke) ?></a>
         <?php endforeach; ?>
     </div>
 

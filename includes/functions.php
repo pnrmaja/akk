@@ -20,14 +20,59 @@ function varosok(): array
     return array_values(array_unique(array_column(kepzesek(), 'varos')));
 }
 
-/** Képzések szűrése településre; null = mind. */
-function szurt_kepzesek(?string $varos): array
+/**
+ * A szűrhető jogviszony-típusok: kulcs => megjelenítendő címke.
+ * A kulcsot használjuk a lekérdezési paraméterben és a szűrésben.
+ */
+function jogviszony_tipusok(): array
 {
-    if ($varos === null) {
-        return kepzesek();
-    }
-    return array_values(array_filter(
-        kepzesek(),
-        fn(array $k) => $k['varos'] === $varos
-    ));
+    return [
+        'tanuloi'        => 'Tanulói jogviszony',
+        'felnottkepzesi' => 'Felnőttképzési jogviszony',
+    ];
 }
+
+/**
+ * Illeszkedik-e egy képzés jogviszony-mezője a kiválasztott típusra.
+ * A mezőben előfordulhat kombinált érték (pl. "tanulói-, felnőttképzési
+ * jogviszony"), ezért részszöveg-egyezést vizsgálunk, nem egyenlőséget.
+ */
+function jogviszony_illeszkedik(string $kepzesJogviszony, string $tipus): bool
+{
+    return match ($tipus) {
+        'tanuloi'        => str_contains($kepzesJogviszony, 'tanulói'),
+        'felnottkepzesi' => str_contains($kepzesJogviszony, 'felnőttképzési'),
+        default          => true,
+    };
+}
+
+/** Képzések szűrése településre és/vagy jogviszonyra; null = nincs szűrés az adott dimenzióban. */
+function szurt_kepzesek(?string $varos, ?string $jogviszony = null): array
+{
+    $lista = kepzesek();
+
+    if ($varos !== null) {
+        $lista = array_filter($lista, fn(array $k) => $k['varos'] === $varos);
+    }
+
+    if ($jogviszony !== null) {
+        $lista = array_filter($lista, fn(array $k) => jogviszony_illeszkedik($k['jogviszony'], $jogviszony));
+    }
+
+    return array_values($lista);
+}
+
+/** A szakmaink.php szűrőlinkjeinek URL-je, a másik szűrő megtartásával. */
+function szakma_szuro_url(?string $varos, ?string $jogviszony): string
+{
+    $params = [];
+    if ($varos !== null) {
+        $params['varos'] = $varos;
+    }
+    if ($jogviszony !== null) {
+        $params['jogviszony'] = $jogviszony;
+    }
+    return $params ? ('szakmaink.php?' . http_build_query($params)) : 'szakmaink.php';
+}
+
+
