@@ -20,7 +20,7 @@ $aktualis  = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: 
 <body>
     <header class="fejlec">
 
-        <img src="assets/fejlec/fejlec.jpg" alt="Szalézi Ágazati Képzőközpont">
+        <img src="assets/fejlec/fejlec.webp" alt="Szalézi Ágazati Képzőközpont">
 
     </header>
 

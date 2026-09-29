@@ -4,20 +4,20 @@ $oldalCim = 'Galéria';
 $oldalCss = 'assets/galeria.css';
 
 $kepek = [
-    '1-es terem.jpeg',
-    '2-es terem.jpg',
-    '2-es terem1.jpg',
-    '2-es terem2.jpg',
-    '3-as terem.jpg',
-    '3-as terem1.jpg',
-    '3-as terem2.jpg',
-    '4-es terem.jpg',
-    '4-es terem1.jpg',
-    '4-es terem2.jpg',
-    '4-es terem3.jpg',
-    '6-os terem.jpg',
-    '6-os terem1.jpg',
-    '6-os terem2.jpg'
+    '1-es terem.webp',
+    '2-es terem.webp',
+    '2-es terem1.webp',
+    '2-es terem2.webp',
+    '3-as terem.webp',
+    '3-as terem1.webp',
+    '3-as terem2.webp',
+    '4-es terem.webp',
+    '4-es terem1.webp',
+    '4-es terem2.webp',
+    '4-es terem3.webp',
+    '6-os terem.webp',
+    '6-os terem1.webp',
+    '6-os terem2.webp'
 ];
 
 require __DIR__ . '/includes/header.php';

@@ -5,79 +5,79 @@ $oldalCss = 'assets/hireink.css';
 
 $hirek = [
     [
-        'kep' => 'rajz_01.jpg',
+        'kep' => 'rajz_01.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_02.jpg',
+        'kep' => 'rajz_02.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_03.jpg',
+        'kep' => 'rajz_03.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_04.jpg',
+        'kep' => 'rajz_04.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_05.jpg',
+        'kep' => 'rajz_05.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_06.jpg',
+        'kep' => 'rajz_06.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_07.jpg',
+        'kep' => 'rajz_07.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_08.jpg',
+        'kep' => 'rajz_08.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_09.jpg',
+        'kep' => 'rajz_09.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_10.jpg',
+        'kep' => 'rajz_10.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_11.jpg',
+        'kep' => 'rajz_11.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_12.jpg',
+        'kep' => 'rajz_12.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_13.jpg',
+        'kep' => 'rajz_13.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_14.jpg',
+        'kep' => 'rajz_14.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_15.jpg',
+        'kep' => 'rajz_15.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_16.jpg',
+        'kep' => 'rajz_16.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_17.jpg',
+        'kep' => 'rajz_17.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_18.jpg',
+        'kep' => 'rajz_18.webp',
         'nev' => 'Festő neve'
     ],
     [
-        'kep' => 'rajz_19.jpg',
+        'kep' => 'rajz_19.webp',
         'nev' => 'Festő neve'
     ]
 ];

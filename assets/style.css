@@ -151,7 +151,7 @@ nav { background-color: #fff; }
     display: block;
 }
 
-.lablec { background-color: #eee; margin-top: 40px; }
+.lablec { background-color: #eee; margin-top: 40px; font-weight: bold; }
 .lablec-belso {
     max-width: 1000px;
     margin: 0 auto;
