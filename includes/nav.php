@@ -28,7 +28,7 @@ function menu_adatok(): array
 
         ['label' => 'Galéria', 'href' => 'galeria.php'],
 
-        ['label' => 'Kapcsolat', 'href' => '#'],
+        ['label' => 'Kapcsolat', 'href' => 'kapcsolat.php'],
     ];
 }
 
