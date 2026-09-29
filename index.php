@@ -6,7 +6,10 @@ require __DIR__ . '/includes/header.php';
     <h1>Szalézi Ágazati Képzőközpont</h1>
     <p>Üdvözölünk a Szalézi Ágazati Képzőközpont oldalán!</p>
 
-
+    <p class="fejlesztes">
+        A weboldal még fejlesztés alatt áll.<br>
+        <span lang="en">This website is still under development.</span>
+    </p>
 
     <section class="terkep-szekcio">
         <h2>Hol találsz minket?</h2>
