@@ -99,7 +99,7 @@ require __DIR__ . '/includes/header.php';
             <div class="hir-elem <?= $index === 0 ? 'aktiv' : '' ?>">
 
                 <img
-                    src="assets/galeria/<?= e($hir['kep']) ?>"
+                    src="assets/hirek/<?= e($hir['kep']) ?>"
                     alt="<?= e($hir['nev']) ?>"
                 >
 
