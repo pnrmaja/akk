@@ -76,3 +76,33 @@ function szakma_szuro_url(?string $varos, ?string $jogviszony): string
 }
 
 
+/** A szakma URL-barát azonosítója: "4 0722 08 01" → "4-0722-08-01". */
+function szakma_id(array $kepzes): string
+{
+    return str_replace(' ', '-', $kepzes['azonosito']);
+}
+
+/** A szakma részletek oldalának URL-je. */
+function szakma_url(array $kepzes): string
+{
+    return 'reszletek.php?id=' . rawurlencode(szakma_id($kepzes));
+}
+
+/** Képzés keresése az URL-ben kapott azonosító alapján; null, ha nincs ilyen. */
+function kepzes_azonosito_alapjan(string $id): ?array
+{
+    foreach (kepzesek() as $kepzes) {
+        if (szakma_id($kepzes) === $id) {
+            return $kepzes;
+        }
+    }
+    return null;
+}
+
+/** Egy szakma részletes leírás-blokkjai (includes/reszletekAdatok.php); üres tömb, ha nincs. */
+function kepzes_reszletek(string $azonosito): array
+{
+    static $reszletek = null;
+    $reszletek ??= require __DIR__ . '/reszletekAdatok.php';
+    return $reszletek[$azonosito] ?? [];
+}

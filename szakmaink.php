@@ -45,7 +45,7 @@ require __DIR__ . '/includes/header.php';
     <div id="kepzesek">
         <?php foreach ($lista as $k): ?>
             <article class="kepzes-kartya">
-                <h2><?= e($k['nev']) ?></h2>
+                <h2><a href="<?= e(szakma_url($k)) ?>"><?= e($k['nev']) ?></a></h2>
                 <p>Település: <?= e($k['varos']) ?></p>
                 <p>Ágazat: <?= e($k['agazat']) ?></p>
                 <p>Jogviszony: <?= e($k['jogviszony']) ?></p>
@@ -62,6 +62,8 @@ require __DIR__ . '/includes/header.php';
                 <?php if (!empty($k['alkalmassagi'])): ?>
                     <p class="alkalmassagi"><?= e($k['alkalmassagi']) ?></p>
                 <?php endif; ?>
+
+                <p class="reszletek-link">Részletek &rarr;</p>
             </article>
         <?php endforeach; ?>
 

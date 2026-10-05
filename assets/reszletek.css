@@ -1,0 +1,52 @@
+.reszletek {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px 0 30px;
+}
+
+.reszletek-vissza { margin-bottom: 5px; }
+.reszletek-vissza a { color: #e30613; text-decoration: none; font-weight: bold; }
+.reszletek-vissza a:hover { text-decoration: underline; }
+
+.reszletek > h1 { font-size: 34px; margin: 10px 0 25px; }
+
+.reszletek-adatok {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    border-left: 5px solid #e30613;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+.reszletek-adatok dt {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+}
+.reszletek-adatok dd { font-weight: bold; margin-top: 3px; }
+
+.reszletek h2 { font-size: 22px; margin: 30px 0 12px; }
+
+.reszletek p {
+    line-height: 1.7;
+    margin-bottom: 14px;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.reszletek ul { margin: 0 0 14px 25px; line-height: 1.7; }
+.reszletek li { margin-bottom: 6px; }
+
+.reszletek .alkalmassagi {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .reszletek > h1 { font-size: 26px; }
+    .reszletek-adatok { padding: 18px 20px; }
+}

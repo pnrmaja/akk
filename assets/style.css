@@ -428,3 +428,9 @@ nav { background-color: #fff; }
         height: 300px;
     }
 }
+
+.kepzes-kartya { position: relative; }
+.kepzes-kartya h2 a { color: inherit; text-decoration: none; }
+.kepzes-kartya h2 a::after { content: ""; position: absolute; inset: 0; }
+.kepzes-kartya:hover { background-color: #f7f7f7; }
+.reszletek-link { color: #e30613; font-weight: bold; }
