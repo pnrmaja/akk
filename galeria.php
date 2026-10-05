@@ -1,8 +1,16 @@
 <?php
+/**
+ * galeria.php - Galéria (termeink)
+ *
+ * Képlapozó: a képek az assets/galeria/ mappában vannak, a megjelenítés
+ * sorrendje a $kepek tömb sorrendje. A lapozó JavaScript az oldal alján
+ * van; 5 másodpercenként automatikusan is lapoz.
+ */
 
 $oldalCim = 'Galéria';
-$oldalCss = 'assets/galeria.css';
+$oldalCss = 'assets/galeria.css'; // Oldalspecifikus stílus
 
+// A megjelenítendő képek fájlnevei (assets/galeria/)
 $kepek = [
     '1-es terem.webp',
     '2-es terem.webp',
@@ -28,8 +36,10 @@ require __DIR__ . '/includes/header.php';
 
 <div class="galeria">
 
+    <!-- Előző kép -->
     <button class="galeria-gomb balra" onclick="elozoKep()">&#10094;</button>
 
+    <!-- Képek: egyszerre csak az 'aktiv' osztályú látszik -->
     <div class="galeria-kep">
         <?php foreach ($kepek as $index => $kep): ?>
             <img
@@ -40,15 +50,19 @@ require __DIR__ . '/includes/header.php';
         <?php endforeach; ?>
     </div>
 
+    <!-- Következő kép -->
     <button class="galeria-gomb jobbra" onclick="kovetkezoKep()">&#10095;</button>
 
 </div>
 
 <script>
+// Az éppen megjelenített kép indexe
 let aktualisKep = 0;
 
+// Az összes kép elem a lapozóban
 const kepek = document.querySelectorAll('.galeria-kep img');
 
+// Megjeleníti a megadott indexű képet, a többit elrejti
 function mutatKep(index) {
     kepek.forEach(kep => {
         kep.classList.remove('aktiv');
@@ -57,6 +71,7 @@ function mutatKep(index) {
     kepek[index].classList.add('aktiv');
 }
 
+// Következő kép; az utolsó után visszaugrik az elsőre
 function kovetkezoKep() {
     aktualisKep++;
 
@@ -67,6 +82,7 @@ function kovetkezoKep() {
     mutatKep(aktualisKep);
 }
 
+// Előző kép; az első előtt az utolsóra ugrik
 function elozoKep() {
     aktualisKep--;
 
@@ -77,6 +93,7 @@ function elozoKep() {
     mutatKep(aktualisKep);
 }
 
+// Automatikus lapozás 5 másodpercenként
 setInterval(kovetkezoKep, 5000);
 </script>
 

@@ -1,4 +1,15 @@
 <?php
+/**
+ * includes/dualisKepzesAdatok.php
+ *
+ * A Duális képzés oldal (dualisKepzes.php) szöveges blokkjai.
+ * Minden elem egy szekció, két mezővel:
+ *   cim   - a szekció címe (<h2>)
+ *   szoveg - a szekció szövege (<p>)
+ *
+ * Új blokk felvétele: új ['cim' => ..., 'szoveg' => ...] elem a tömbben.
+ * A blokkok a megadott sorrendben jelennek meg.
+ */
 
 return [
 

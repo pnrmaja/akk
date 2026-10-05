@@ -1,3 +1,13 @@
+/* ==========================================================================
+   assets/reszletek.css
+   A szakma részletes oldalának (reszletek.php) stílusa.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Oldalkeret, visszalink és főcím
+   -------------------------------------------------------------------------- */
+
 .reszletek {
     max-width: 900px;
     margin: 0 auto;
@@ -10,6 +20,11 @@
 
 .reszletek > h1 { font-size: 34px; margin: 10px 0 25px; }
 
+
+/* --------------------------------------------------------------------------
+   Alapadatok (település, ágazat, jogviszony, azonosító)
+   -------------------------------------------------------------------------- */
+
 .reszletek-adatok {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -18,7 +33,7 @@
     margin-bottom: 30px;
     background-color: #fff;
     border-radius: 12px;
-    border-left: 5px solid #e30613;
+    border-left: 5px solid #e30613; /* Piros kiemelő csík */
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 .reszletek-adatok dt {
@@ -28,6 +43,11 @@
     color: #888;
 }
 .reszletek-adatok dd { font-weight: bold; margin-top: 3px; }
+
+
+/* --------------------------------------------------------------------------
+   Leírás: alcímek, bekezdések, felsorolások
+   -------------------------------------------------------------------------- */
 
 .reszletek h2 { font-size: 22px; margin: 30px 0 12px; }
 
@@ -41,10 +61,16 @@
 .reszletek ul { margin: 0 0 14px 25px; line-height: 1.7; }
 .reszletek li { margin-bottom: 6px; }
 
+/* Alkalmassági vizsgálatra figyelmeztető szöveg */
 .reszletek .alkalmassagi {
     font-weight: bold;
     margin-top: 20px;
 }
+
+
+/* --------------------------------------------------------------------------
+   Reszponzív nézet (tablet és telefon)
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 768px) {
     .reszletek > h1 { font-size: 26px; }

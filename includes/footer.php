@@ -1,9 +1,22 @@
+<?php
+/**
+ * includes/footer.php
+ *
+ * Közös oldallábléc: lezárja a header.php-ban megnyitott <main> elemet,
+ * kirajzolja a láblécet (vezetők és általános elérhetőségek), majd lezárja
+ * a <body> és <html> elemet.
+ *
+ * Megjegyzés: a lábléc adatai itt kézzel vannak beírva. Változtatásukkor
+ * az includes/kapcsolatAdatok.php-t (Kapcsolat oldal) is érdemes frissíteni.
+ */
+?>
 </main>
 
 <footer class="lablec">
 
     <div class="lablec-belso">
 
+        <!-- 1. sor: vezetők és kapcsolattartók -->
         <div class="lablec-sor lablec-sor-elso">
 
             <section>
@@ -41,7 +54,7 @@
 
         </div>
 
-
+        <!-- 2. sor: általános elérhetőségek és igazolások -->
         <div class="lablec-sor lablec-sor-masodik">
 
             <section>

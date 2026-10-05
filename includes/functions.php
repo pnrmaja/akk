@@ -1,28 +1,71 @@
 <?php
+/**
+ * includes/functions.php
+ *
+ * Közös segédfüggvények az egész weboldalhoz:
+ *   - kimenet escape-elése (XSS elleni védelem)
+ *   - képzési adatok betöltése és szűrése
+ *   - szakma-azonosítók és URL-ek előállítása
+ *
+ * Betöltő: includes/header.php (require_once), valamint közvetlenül a
+ * szakmaink.php és a reszletek.php.
+ */
 declare(strict_types=1);
 
-/** HTML-escape rövidítés – minden kiírt szöveghez használd. */
+
+/* ==========================================================================
+   KIMENET VÉDELME
+   ========================================================================== */
+
+/**
+ * HTML-escape rövidítés. Minden dinamikus kiírásnál ezt használjuk.
+ *
+ * @param string $szoveg A kiírandó nyers szöveg.
+ * @return string        HTML-ben biztonságosan megjeleníthető szöveg.
+ */
 function e(string $szoveg): string
 {
     return htmlspecialchars($szoveg, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-/** Az összes képzés (egyszer töltjük be a kérés alatt). */
+
+/* ==========================================================================
+   KÉPZÉSI ADATOK
+   ========================================================================== */
+
+/**
+ * Az összes képzés az includes/adatok.php fájlból.
+ * A `static` változó miatt egy kérésen belül csak egyszer olvassuk be.
+ *
+ * @return array[] Képzések listája (lásd adatok.php a mezőkért).
+ */
 function kepzesek(): array
 {
     static $kepzesek = null;
     return $kepzesek ??= require __DIR__ . '/adatok.php';
 }
 
-/** A képzésekben szereplő települések (Budapest, Kazincbarcika…). */
+/**
+ * A képzésekben szereplő egyedi települések (pl. Budapest, Kazincbarcika),
+ * az adatok sorrendjében. A szűrősáv és a menü almenüje is ezt használja.
+ *
+ * @return string[]
+ */
 function varosok(): array
 {
     return array_values(array_unique(array_column(kepzesek(), 'varos')));
 }
 
+
+/* ==========================================================================
+   JOGVISZONY-SZŰRÉS
+   ========================================================================== */
+
 /**
- * A szűrhető jogviszony-típusok: kulcs => megjelenítendő címke.
- * A kulcsot használjuk a lekérdezési paraméterben és a szűrésben.
+ * A szűrhető jogviszony-típusok: kulcs => megjelenített címke.
+ * A kulcs kerül az URL-be (?jogviszony=...) és a szűrési logikába.
+ *
+ * @return array<string,string>
  */
 function jogviszony_tipusok(): array
 {
@@ -33,9 +76,13 @@ function jogviszony_tipusok(): array
 }
 
 /**
- * Illeszkedik-e egy képzés jogviszony-mezője a kiválasztott típusra.
- * A mezőben előfordulhat kombinált érték (pl. "tanulói-, felnőttképzési
- * jogviszony"), ezért részszöveg-egyezést vizsgálunk, nem egyenlőséget.
+ * Eldönti, hogy egy képzés jogviszony-mezője illeszkedik-e a típusra.
+ * A mező lehet kombinált is (pl. "tanulói-, felnőttképzési jogviszony"),
+ * ezért egyenlőség helyett részszöveg-egyezést vizsgálunk.
+ *
+ * @param string $kepzesJogviszony A képzés `jogviszony` mezője.
+ * @param string $tipus            A jogviszony_tipusok() egyik kulcsa.
+ * @return bool                    Igaz, ha a képzés megfelel a típusnak.
  */
 function jogviszony_illeszkedik(string $kepzesJogviszony, string $tipus): bool
 {
@@ -46,15 +93,24 @@ function jogviszony_illeszkedik(string $kepzesJogviszony, string $tipus): bool
     };
 }
 
-/** Képzések szűrése településre és/vagy jogviszonyra; null = nincs szűrés az adott dimenzióban. */
+/**
+ * Képzések szűrése településre és/vagy jogviszonyra.
+ * A két szűrő egymástól függetlenül kombinálható.
+ *
+ * @param string|null $varos      Település neve; null = nincs szűrés.
+ * @param string|null $jogviszony Jogviszony-kulcs; null = nincs szűrés.
+ * @return array[]                A szűrt, újraindexelt lista.
+ */
 function szurt_kepzesek(?string $varos, ?string $jogviszony = null): array
 {
     $lista = kepzesek();
 
+    // Településre szűrés
     if ($varos !== null) {
         $lista = array_filter($lista, fn(array $k) => $k['varos'] === $varos);
     }
 
+    // Jogviszonyra szűrés
     if ($jogviszony !== null) {
         $lista = array_filter($lista, fn(array $k) => jogviszony_illeszkedik($k['jogviszony'], $jogviszony));
     }
@@ -62,33 +118,59 @@ function szurt_kepzesek(?string $varos, ?string $jogviszony = null): array
     return array_values($lista);
 }
 
-/** A szakmaink.php szűrőlinkjeinek URL-je, a másik szűrő megtartásával. */
+
+/* ==========================================================================
+   URL-EK ÉS AZONOSÍTÓK
+   ========================================================================== */
+
+/**
+ * A szakmaink.php szűrőlinkjeinek URL-je. Az egyik szűrő módosításakor
+ * a másik szűrő értéke megmarad.
+ *
+ * @param string|null $varos      Település; null = kimarad az URL-ből.
+ * @param string|null $jogviszony Jogviszony-kulcs; null = kimarad az URL-ből.
+ * @return string                 Pl. "szakmaink.php?varos=Budapest".
+ */
 function szakma_szuro_url(?string $varos, ?string $jogviszony): string
 {
     $params = [];
+
     if ($varos !== null) {
         $params['varos'] = $varos;
     }
     if ($jogviszony !== null) {
         $params['jogviszony'] = $jogviszony;
     }
+
     return $params ? ('szakmaink.php?' . http_build_query($params)) : 'szakmaink.php';
 }
 
-
-/** A szakma URL-barát azonosítója: "4 0722 08 01" → "4-0722-08-01". */
+/**
+ * A szakma URL-barát azonosítója: "4 0722 08 01" → "4-0722-08-01".
+ *
+ * @param array $kepzes Egy képzés az adatok.php-ból.
+ */
 function szakma_id(array $kepzes): string
 {
     return str_replace(' ', '-', $kepzes['azonosito']);
 }
 
-/** A szakma részletek oldalának URL-je. */
+/**
+ * A szakma részletek oldalának URL-je (reszletek.php?id=...).
+ *
+ * @param array $kepzes Egy képzés az adatok.php-ból.
+ */
 function szakma_url(array $kepzes): string
 {
     return 'reszletek.php?id=' . rawurlencode(szakma_id($kepzes));
 }
 
-/** Képzés keresése az URL-ben kapott azonosító alapján; null, ha nincs ilyen. */
+/**
+ * Képzés keresése az URL-ben kapott azonosító alapján.
+ *
+ * @param string $id URL-barát azonosító (lásd szakma_id()).
+ * @return array|null A talált képzés, vagy null, ha nincs ilyen.
+ */
 function kepzes_azonosito_alapjan(string $id): ?array
 {
     foreach (kepzesek() as $kepzes) {
@@ -99,7 +181,18 @@ function kepzes_azonosito_alapjan(string $id): ?array
     return null;
 }
 
-/** Egy szakma részletes leírás-blokkjai (includes/reszletekAdatok.php); üres tömb, ha nincs. */
+
+/* ==========================================================================
+   SZAKMA RÉSZLETES LEÍRÁSA
+   ========================================================================== */
+
+/**
+ * Egy szakma részletes leírás-blokkjai az includes/reszletekAdatok.php-ból.
+ * A tömb kulcsa a szakma eredeti azonosítója (szóközökkel, pl. "4 0722 08 01").
+ *
+ * @param string $azonosito A szakma `azonosito` mezője.
+ * @return array            Blokkok [típus, tartalom] formában; üres, ha nincs.
+ */
 function kepzes_reszletek(string $azonosito): array
 {
     static $reszletek = null;

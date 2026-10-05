@@ -1,11 +1,25 @@
 <?php
+/**
+ * includes/kapcsolatAdatok.php
+ *
+ * A Kapcsolat oldal (kapcsolat.php) adatai; egy helyen szerkeszthetők.
+ * Minden elem egy kártya, a következő mezőkkel:
+ *   cim        - a kártya címe (kötelező)
+ *   ikon       - emoji az ikonhoz
+ *   nev        - személy neve (opcionális)
+ *   megjegyzes - rövid megjegyzés a cím alatt (opcionális)
+ *   sorok      - a megjelenő adatsorok; mindegyik:
+ *                  felirat - az adat megnevezése (pl. "Email")
+ *                  ertek   - a megjelenített érték
+ *                  href    - opcionális link (mailto:, tel: stb.)
+ *
+ * Megjegyzés: a lábléc (footer.php) adatai külön, kézzel vannak beírva.
+ */
 declare(strict_types=1);
-
-// Kapcsolati adatok – egy helyen szerkeszthetők.
-// Mezők: cim, ikon, nev (opcionális), megjegyzes (opcionális), sorok: [felirat, ertek, href (opcionális)]
 
 return [
 
+    // Általános elérhetőségek
     [
         "cim"   => "Elérhetőségek",
         "ikon"  => "📞",
@@ -15,6 +29,7 @@ return [
         ],
     ],
 
+    // Táppénzes igazolások beküldése
     [
         "cim"        => "Igazolások",
         "ikon"       => "🩺",
@@ -24,6 +39,7 @@ return [
         ],
     ],
 
+    // Vezetők és kapcsolattartók
     [
         "cim"   => "Ügyvezető",
         "ikon"  => "👤",

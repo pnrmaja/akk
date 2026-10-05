@@ -1,8 +1,18 @@
 <?php
+/**
+ * hireink.php - Híreink
+ *
+ * Képlapozó a hírek képeivel (assets/hirek/). Minden elemhez tartozik egy
+ * képfájl és egy megjelenített név. A lapozó JavaScript az oldal alján van;
+ * 4 másodpercenként automatikusan is lapoz.
+ *
+ * Megjegyzés: a 'nev' mezők jelenleg helyőrzők ("Festő neve").
+ */
 
 $oldalCim = 'Híreink';
-$oldalCss = 'assets/hireink.css';
+$oldalCss = 'assets/hireink.css'; // Oldalspecifikus stílus
 
+// A hírek listája: 'kep' = fájlnév (assets/hirek/), 'nev' = megjelenő felirat
 $hirek = [
     [
         'kep' => 'rajz_01.webp',
@@ -90,8 +100,10 @@ require __DIR__ . '/includes/header.php';
 
 <div class="hirek">
 
+    <!-- Előző hír -->
     <button class="hirek-gomb balra" onclick="elozoHir()">&#10094;</button>
 
+    <!-- Hírek: egyszerre csak az 'aktiv' osztályú látszik -->
     <div class="hir">
 
         <?php foreach ($hirek as $index => $hir): ?>
@@ -111,16 +123,20 @@ require __DIR__ . '/includes/header.php';
 
     </div>
 
+    <!-- Következő hír -->
     <button class="hirek-gomb jobbra" onclick="kovetkezoHir()">&#10095;</button>
 
 </div>
 
 <script>
 
+// Az éppen megjelenített hír indexe
 let aktualisHir = 0;
 
+// Az összes hír elem a lapozóban
 const hirek = document.querySelectorAll('.hir-elem');
 
+// Megjeleníti a megadott indexű hírt, a többit elrejti
 function mutatHirt(index) {
 
     hirek.forEach(hir => {
@@ -130,6 +146,7 @@ function mutatHirt(index) {
     hirek[index].classList.add('aktiv');
 }
 
+// Következő hír; az utolsó után visszaugrik az elsőre
 function kovetkezoHir() {
 
     aktualisHir++;
@@ -141,6 +158,7 @@ function kovetkezoHir() {
     mutatHirt(aktualisHir);
 }
 
+// Előző hír; az első előtt az utolsóra ugrik
 function elozoHir() {
 
     aktualisHir--;
@@ -152,6 +170,7 @@ function elozoHir() {
     mutatHirt(aktualisHir);
 }
 
+// Automatikus lapozás 4 másodpercenként
 setInterval(kovetkezoHir, 4000);
 
 </script>

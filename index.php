@@ -1,8 +1,15 @@
 <?php
+/**
+ * index.php - Főoldal
+ *
+ * Bemutatkozó (hero) rész, "fejlesztés alatt" jelzés és Google Térkép.
+ * Statikus tartalom, nem használ külön adatfájlt.
+ */
 $oldalCim = 'Szalézi AKK';
 require __DIR__ . '/includes/header.php';
 ?>
 
+<!-- Bemutatkozó rész: cím, kérdések és a három célcsoport -->
 <section class="hero">
 
     <h1>Szalézi Ágazati Képzőközpont</h1>
@@ -21,6 +28,7 @@ require __DIR__ . '/includes/header.php';
         a szakmájukban.
     </p>
 
+    <!-- A három kiemelt üzenet (diák / szülő / vállalkozás) -->
     <div class="kiemelt-szoveg">
 
         <div>
@@ -43,12 +51,14 @@ require __DIR__ . '/includes/header.php';
 </section>
 
 
+<!-- Tájékoztató: az oldal még fejlesztés alatt áll (magyarul és angolul) -->
 <p class="fejlesztes">
     A weboldal még fejlesztés alatt áll.<br>
     <span lang="en">This website is still under development.</span>
 </p>
 
 
+<!-- Térkép: a képzőközpont címe (1044 Budapest, Váci út 73.) -->
 <section class="terkep-szekcio">
 
     <h2>Hol találsz minket?</h2>

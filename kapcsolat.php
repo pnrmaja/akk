@@ -1,8 +1,18 @@
 <?php
-ini_set('display_errors', '1'); error_reporting(E_ALL);
-$oldalCim = 'Kapcsolat – Szalézi AKK';
-$oldalCss = 'assets/kapcsolat.css';
+/**
+ * kapcsolat.php - Kapcsolat
+ *
+ * Elérhetőségi kártyák. Az adatok az includes/kapcsolatAdatok.php-ban
+ * szerkeszthetők.
+ */
 
+// FIGYELEM: fejlesztői hibakijelzés. Éles üzemben ezt a sort el kell távolítani.
+ini_set('display_errors', '1'); error_reporting(E_ALL);
+
+$oldalCim = 'Kapcsolat – Szalézi AKK';
+$oldalCss = 'assets/kapcsolat.css'; // Oldalspecifikus stílus
+
+// A kapcsolati kártyák adatainak betöltése
 $KAPCSOLAT = require __DIR__ . '/includes/kapcsolatAdatok.php';
 
 require __DIR__ . '/includes/header.php';
@@ -18,14 +28,17 @@ require __DIR__ . '/includes/header.php';
                 <div class="kapcsolat-ikon"><?= e($elem['ikon'] ?? '') ?></div>
                 <h2><?= e($elem['cim']) ?></h2>
 
+                <!-- Megjegyzés (opcionális) -->
                 <?php if (!empty($elem['megjegyzes'])): ?>
                     <p class="kapcsolat-megjegyzes"><?= e($elem['megjegyzes']) ?></p>
                 <?php endif; ?>
 
+                <!-- Személy neve (opcionális) -->
                 <?php if (!empty($elem['nev'])): ?>
                     <p class="kapcsolat-nev"><?= e($elem['nev']) ?></p>
                 <?php endif; ?>
 
+                <!-- Adatsorok: felirat + érték (linkként, ha van href) -->
                 <?php foreach ($elem['sorok'] as $sor): ?>
                     <p class="kapcsolat-sor">
                         <span class="kapcsolat-felirat"><?= e($sor['felirat']) ?></span>
@@ -41,7 +54,4 @@ require __DIR__ . '/includes/header.php';
     </div>
 </div>
 
-
-
 <?php require __DIR__ . '/includes/footer.php'; ?>
-

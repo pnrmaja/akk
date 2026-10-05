@@ -1,7 +1,28 @@
 <?php
+/**
+ * includes/adatok.php
+ *
+ * A képzések (szakmák) adatai. A fájlt a functions.php kepzesek() függvénye
+ * tölti be; ebből épül a Szakmáink oldal, a szűrők, a menü almenüje és a
+ * részletek oldal is. A tömb sorrendje egyben a megjelenítés sorrendje.
+ *
+ * Kötelező mezők:
+ *   nev        - a képzés / szakma neve
+ *   varos      - a telephely települése (a szűrőt és a menüt vezérli)
+ *   jogviszony - szabad szöveg; a szűrés részszöveg-egyezéssel működik
+ *   agazat     - az ágazat / szakmacsoport megnevezése
+ *   azonosito  - szakma-azonosító (a reszletekAdatok.php kulcsa is ez)
+ *
+ * Opcionális mezők:
+ *   szakmairanyok - tömb, ha a szakmának több szakmairánya van
+ *   alkalmassagi  - szöveg, ha foglalkozás-egészségügyi vizsgálat szükséges
+ *
+ * Új képzés felvétele: egy új tömbelem hozzáadása; a szűrők, a menü és a
+ * kártyalista automatikusan frissül. A részletes leírás a
+ * reszletekAdatok.php-ban adható meg ugyanazzal az azonosítóval.
+ */
 declare(strict_types=1);
 
-// Képzések adatai. Opcionális mezők: szakmairanyok (tömb), alkalmassagi (szöveg).
 return [
     ['nev' => 'Asztalos', 'varos' => 'Budapest', 'jogviszony' => 'felnőttképzési jogviszony',
      'agazat' => 'Fa- és bútoripar', 'azonosito' => '4 0722 08 01'],

@@ -1,3 +1,13 @@
+/* ==========================================================================
+   assets/kapcsolat.css
+   A Kapcsolat oldal (kapcsolat.php) stílusa.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Oldalkeret, főcím és bevezető
+   -------------------------------------------------------------------------- */
+
 .kapcsolat-oldal {
     max-width: 1100px;
     margin: 0 auto;
@@ -16,6 +26,11 @@
     margin-bottom: 45px;
 }
 
+
+/* --------------------------------------------------------------------------
+   Kártyarács: automatikusan igazodó oszlopszám
+   -------------------------------------------------------------------------- */
+
 #kapcsolat-tartalom {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -27,7 +42,7 @@
     padding: 30px 35px;
     border-radius: 12px;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-    border-top: 5px solid #e30613;
+    border-top: 5px solid #e30613; /* Piros kiemelő csík */
     text-align: center;
 }
 
@@ -48,13 +63,24 @@
     color: #444;
 }
 
+
+/* --------------------------------------------------------------------------
+   Linkek a kártyákon (email, telefon)
+   -------------------------------------------------------------------------- */
+
 .kapcsolat-kartya a {
     color: #e30613;
     font-weight: bold;
     text-decoration: none;
+    word-break: break-word; /* Hosszú email-címek tördelése */
 }
 
 .kapcsolat-kartya a:hover { text-decoration: underline; }
+
+
+/* --------------------------------------------------------------------------
+   Kártya-elemek: név, megjegyzés, adat-felirat
+   -------------------------------------------------------------------------- */
 
 .kapcsolat-nev { font-weight: bold; font-size: 19px; color: #000; }
 .kapcsolat-megjegyzes { font-size: 15px; font-style: italic; margin-bottom: 10px; }
@@ -66,7 +92,11 @@
     color: #888;
     margin-top: 8px;
 }
-.kapcsolat-kartya a { word-break: break-word; }
+
+
+/* --------------------------------------------------------------------------
+   Reszponzív nézet (tablet és telefon)
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 768px) {
     .kapcsolat-oldal { padding: 35px 20px 50px; }

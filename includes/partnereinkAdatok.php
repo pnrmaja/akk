@@ -1,4 +1,15 @@
 <?php
+/**
+ * includes/partnereinkAdatok.php
+ *
+ * A Partnereink oldal (partnereink.php) adatai. Mezők:
+ *   nev - a partner neve
+ *   url - a partner weboldala; null, ha nincs (ilyenkor sima szövegként jelenik meg)
+ *
+ * Új partner felvétele: új elem a tömb végére (vagy tetszőleges helyére);
+ * a sorrend egyben a megjelenítés sorrendje.
+ */
+declare(strict_types=1);
 
 return [
     [

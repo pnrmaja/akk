@@ -1,13 +1,19 @@
 <?php
+/**
+ * partnereink.php - Partnereink
+ *
+ * A partnerek rácsos listája. Az adatok az includes/partnereinkAdatok.php-ban
+ * szerkeszthetők; weboldallal rendelkező partner linkként, a többi sima
+ * szövegként jelenik meg.
+ */
 
 $oldalCim = 'Partnereink';
+$oldalCss = 'assets/partnereink.css'; // Oldalspecifikus stílus
 
-$oldalCss = 'assets/partnereink.css';
-
+// A partnerek listájának betöltése
 $PARTNEREK = require __DIR__ . '/includes/partnereinkAdatok.php';
 
 require __DIR__ . '/includes/header.php';
-
 ?>
 
 <h1>Partnereink</h1>
@@ -20,6 +26,7 @@ require __DIR__ . '/includes/header.php';
 
             <?php if (!empty($partner['url'])): ?>
 
+                <!-- Van weboldal: új lapon megnyíló link -->
                 <a
                     href="<?= e($partner['url']) ?>"
                     target="_blank"
@@ -30,6 +37,7 @@ require __DIR__ . '/includes/header.php';
 
             <?php else: ?>
 
+                <!-- Nincs weboldal: csak a név -->
                 <span>
                     <?= e($partner['nev']) ?>
                 </span>
