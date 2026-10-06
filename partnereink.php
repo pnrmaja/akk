@@ -1,117 +1,62 @@
 <?php
 /**
  * partnereink.php - Partnereink
+ *
+ * A partnerek rácsos listája, ábécé sorrendben. Az adatok az
+ * includes/partnereinkAdatok.php-ban szerkeszthetők; weboldallal rendelkező
+ * partner linkként, a többi sima szövegként jelenik meg.
+ *
+ * A partnerek szakmák szerinti blokkokban jelennek meg (a partnerek
+ * 'szakmak' mezője alapján); a szakma nélküliek az "Egyéb partnerek"
+ * blokkba kerülnek. A bontás a $SZAKMANKENT = false beállítással
+ * kikapcsolható, ekkor egyetlen, cím nélküli rács jelenik meg.
  */
 
 $oldalCim = 'Partnereink';
-$oldalCss = 'assets/partnereink.css';
+$oldalCss = 'assets/partnereink.css'; // Oldalspecifikus stílus
 
+// Szakmák szerinti blokkos megjelenítés (true = be, false = egyetlen rács)
+$SZAKMANKENT = true;
+
+// A partnerek listájának betöltése
 $PARTNEREK = require __DIR__ . '/includes/partnereinkAdatok.php';
 
-/*
- * A partneradatok összegyűjtése.
- * Kezeli azt is, ha a partnerek több szinten vannak
- * az adatok tömbjében.
- */
-function partnerekOsszegyujtese($adatok): array
-{
-    $eredmeny = [];
-
-    if (!is_array($adatok)) {
-        return $eredmeny;
-    }
-
-    foreach ($adatok as $adat) {
-
-        // Ha ez már egy konkrét partner
-        if (
-            is_array($adat) &&
-            array_key_exists('nev', $adat)
-        ) {
-            $eredmeny[] = [
-                'nev' => (string) $adat['nev'],
-                'url' => !empty($adat['url'])
-                    ? (string) $adat['url']
-                    : null
-            ];
-
-            continue;
-        }
-
-        // Ha egy újabb tömbszint következik
-        if (is_array($adat)) {
-            $eredmeny = array_merge(
-                $eredmeny,
-                partnerekOsszegyujtese($adat)
-            );
-        }
-    }
-
-    return $eredmeny;
-}
-
-$PARTNEREK = partnerekOsszegyujtese($PARTNEREK);
-
-
-/*
- * Ábécésorrend
- */
-usort($PARTNEREK, function ($a, $b) {
-    return strcasecmp($a['nev'], $b['nev']);
-});
-
-
 require __DIR__ . '/includes/header.php';
+
+// Csoportok: szakmánként egy blokk; kikapcsolt bontásnál egyetlen, cím nélküli csoport
+$csoportok = partner_csoportok($PARTNEREK, $SZAKMANKENT);
 ?>
 
 <h1>Partnereink</h1>
 
-<p class="partnerek-bevezeto">
-    Közös munkánk alapját megbízható iskolai és vállalati partnereink adják.
-    Együtt azért dolgozunk, hogy tanulóink a képzés mellett valódi szakmai
-    tapasztalatot is szerezhessenek.
-</p>
+<?php foreach ($csoportok as $csoport): ?>
 
-
-<section class="partner-szekcio">
-
-    <div class="partner-cim">
-        <h2>Partnereink</h2>
-
-        <p>
-            Iskolai és vállalati partnereink listája.
-            Ahol elérhető, a partner nevére kattintva megnyitható a hivatalos weboldal.
-        </p>
-    </div>
-
+    <!-- Csoportcím (csak szakmák szerinti bontásnál) -->
+    <?php if ($csoport['cim'] !== null): ?>
+        <h2 class="partner-csoport-cim"><?= e($csoport['cim']) ?></h2>
+    <?php endif; ?>
 
     <div class="partnerek">
 
-        <?php foreach ($PARTNEREK as $partner): ?>
+        <?php foreach ($csoport['partnerek'] as $partner): ?>
 
             <div class="partner-kartya">
 
                 <?php if (!empty($partner['url'])): ?>
 
+                    <!-- Van weboldal: új lapon megnyíló link -->
                     <a
                         href="<?= e($partner['url']) ?>"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-
-                        <span class="partner-nev">
-                            <?= e($partner['nev']) ?>
-                        </span>
-
-                        <span class="partner-link">
-                            Weboldal megnyitása →
-                        </span>
-
+                        <?= e($partner['nev']) ?>
                     </a>
 
                 <?php else: ?>
 
-                    <span class="partner-nev">
+                    <!-- Nincs weboldal: csak a név -->
+                    <span>
                         <?= e($partner['nev']) ?>
                     </span>
 
@@ -123,7 +68,6 @@ require __DIR__ . '/includes/header.php';
 
     </div>
 
-</section>
-
+<?php endforeach; ?>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

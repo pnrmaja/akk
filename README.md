@@ -226,19 +226,19 @@ egyéb (szűrők, menü, kártyalista) automatikusan frissül.
 - A partnerek **ábécé sorrendben** jelennek meg (a `partner_csoportok()`
   rendezi őket), így az adatfájlban a sorrend nem számít.
 - Rácsos elrendezés (3 oszlop, telefonon 1), stílus: `assets/partnereink.css`.
-- **Szakmák szerinti blokkok (előkészítve, jelenleg kikapcsolva):** a
-  `partnereink.php` tetején a `$SZAKMANKENT` változó vezérli. `false`
-  esetén az oldal egyetlen, cím nélküli rácsot ír ki (a jelenlegi nézet).
-  Bekapcsolásához:
-  1. a partnereknél meg kell adni a `szakmak` mezőt, pl.
-     `'szakmak' => ['Villanyszerelő', 'Asztalos']` (az `adatok.php` `nev`
-     értékei); egy partner több szakmánál is szerepelhet;
-  2. a `$SZAKMANKENT` értékét `true`-ra kell állítani.
+- **Szakmák szerinti blokkok (jelenleg bekapcsolva):** a `partnereink.php`
+  tetején a `$SZAKMANKENT` változó vezérli (`true` = blokkok, `false` =
+  egyetlen, cím nélküli rács). A partnereknél a `szakmak` mező adja meg,
+  mely szakmákhoz tartoznak (az `adatok.php` `nev` értékei, vagy a
+  még nem felvett szakmák neve, pl. „Mechatronikai technikus"); egy partner
+  több szakmánál is szerepelhet.
 
-  Ekkor szakmánként egy-egy blokk jelenik meg `<h2 class="partner-csoport-cim">`
+  Szakmánként egy-egy blokk jelenik meg `<h2 class="partner-csoport-cim">`
   címmel (a blokkok és a bennük lévő partnerek is ábécé szerint), a
-  szakma nélküli partnerek pedig „Egyéb partnerek" blokkban a végén.
-- Új partner: új `['nev' => …, 'url' => …]` elem az adatfájlban.
+  `szakmak` nélküli partnerek pedig „Egyéb partnerek" blokkban a végén.
+  A jelenlegi hozzárendelés forrása az „Együttműködő cégek" táblázat
+  (2026 ősz); az iskolák még nincsenek bekötve.
+- Új partner: új `['nev' => …, 'url' => …, 'szakmak' => […]]` elem az adatfájlban (a `szakmak` elhagyható).
 
 ## Kapcsolat oldal (`kapcsolat.php` + `includes/kapcsolatAdatok.php`)
 
@@ -296,7 +296,7 @@ kedvéért érdemes lenne itt is `e()`-re váltani.
 | Új menüpont/almenü | `includes/nav.php` – `menu_adatok()` tömbje |
 | Új „Duális képzés" infóblokk | `includes/dualisKepzesAdatok.php` – új elem |
 | Új partner | `includes/partnereinkAdatok.php` – új elem (a sorrend az ábécé szerint automatikus) |
-| Partnerek szakmák szerinti blokkjai | `szakmak` mező a partnereknél + `$SZAKMANKENT = true` a `partnereink.php`-ban |
+| Partnerek szakmák szerinti blokkjai | `szakmak` mező a partnereknél (a bontás a `partnereink.php`-ban a `$SZAKMANKENT`-tel kapcsolható) |
 | Új kapcsolati kártya | `includes/kapcsolatAdatok.php` – új elem (és a lábléc, ha ott is szerepel) |
 | Új galériakép | kép az `assets/galeria/` mappába + fájlnév a `galeria.php` `$kepek` tömbjébe |
 | Új hír | kép az `assets/hirek/` mappába + új elem a `hireink.php` `$hirek` tömbjébe |
