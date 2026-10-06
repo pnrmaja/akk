@@ -104,7 +104,13 @@ function abc_osszehasonlit(string $a, string $b): int
  */
 function abc_rendez(array $lista, string $mezo): array
 {
-    usort($lista, fn(array $a, array $b) => abc_osszehasonlit($a[$mezo], $b[$mezo]));
+    usort($lista, function (array $a, array $b) use ($mezo): int {
+        $ertekA = isset($a[$mezo]) ? (string) $a[$mezo] : '';
+        $ertekB = isset($b[$mezo]) ? (string) $b[$mezo] : '';
+
+        return abc_osszehasonlit($ertekA, $ertekB);
+    });
+
     return $lista;
 }
 
