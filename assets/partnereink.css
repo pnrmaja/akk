@@ -1,67 +1,156 @@
-/* ==========================================================================
-   assets/partnereink.css
-   A Partnereink oldal (partnereink.php) rácsos kártyalistájának stílusa.
-   ========================================================================== */
+/* =========================================
+   PARTNEREINK
+   ========================================= */
+
+.partnerek-bevezeto {
+    max-width: 850px;
+    margin: 15px 0 45px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #444;
+}
 
 
-/* --------------------------------------------------------------------------
-   Partnerrács: 3 oszlop
-   -------------------------------------------------------------------------- */
+/* =========================================
+   SZEKCIÓ FEJLÉC
+   ========================================= */
+
+.partner-szekcio {
+    margin-top: 20px;
+}
+
+.partner-cim {
+    border-left: 5px solid #e30613;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+.partner-cim h2 {
+    margin: 0 0 6px;
+    font-size: 27px;
+}
+
+.partner-cim p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   PARTNER KÁRTYÁK
+   ========================================= */
 
 .partnerek {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 30px;
+    gap: 18px;
 }
 
 .partner-kartya {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 20px;
+    min-height: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 22px;
+
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+
     text-align: center;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.partner-kartya:hover {
+    transform: translateY(-4px);
+
+    border-color: #e30613;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);
 }
 
 
-/* --------------------------------------------------------------------------
-   Szakmák szerinti blokkok címe
-   (csak akkor látszik, ha a partnereink.php-ban a $SZAKMANKENT be van
-   kapcsolva; egyébként nincs ilyen elem az oldalon)
-   -------------------------------------------------------------------------- */
-
-.partner-csoport-cim { margin: 35px 0 0; font-size: 22px; }
-.partner-csoport-cim + .partnerek { margin-top: 15px; }
-
-
-/* --------------------------------------------------------------------------
-   Partnernév: link (van weboldal) vagy halvány szöveg (nincs weboldal)
-   -------------------------------------------------------------------------- */
+/* =========================================
+   PARTNER LINK
+   ========================================= */
 
 .partner-kartya a {
-    display: block;
-    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+
+    width: 100%;
+
+    color: #111;
     text-decoration: none;
-    font-weight: bold;
 }
 
-.partner-kartya a:hover {
-    background-color: #eee;
-    text-decoration: underline;
-}
-
-.partner-kartya span {
+.partner-nev {
     display: block;
-    color: #666;
+
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 600;
+}
+
+.partner-kartya a:hover .partner-nev {
+    color: #e30613;
+}
+
+.partner-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e30613;
 }
 
 
-/* --------------------------------------------------------------------------
-   Reszponzív nézet: telefonon egy oszlop
-   -------------------------------------------------------------------------- */
+/* =========================================
+   OLYAN PARTNER, AMINEK NINCS WEBOLDALA
+   ========================================= */
 
-@media (max-width: 700px) {
+.partner-kartya > .partner-nev {
+    color: #555;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .partnerek {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================
+   MOBIL
+   ========================================= */
+
+@media (max-width: 600px) {
+
     .partnerek {
         grid-template-columns: 1fr;
     }
+
+    .partner-cim h2 {
+        font-size: 23px;
+    }
+
+    .partnerek-bevezeto {
+        font-size: 16px;
+    }
+
 }

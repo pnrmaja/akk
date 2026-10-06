@@ -1,61 +1,117 @@
 <?php
 /**
  * partnereink.php - Partnereink
- *
- * A partnerek rácsos listája, ábécé sorrendben. Az adatok az
- * includes/partnereinkAdatok.php-ban szerkeszthetők; weboldallal rendelkező
- * partner linkként, a többi sima szövegként jelenik meg.
- *
- * A szakmák szerinti blokkos bontás kész, de egyelőre ki van kapcsolva:
- * a $SZAKMANKENT értékét kell true-ra állítani (és a partnereknél megadni
- * a 'szakmak' mezőt).
  */
 
 $oldalCim = 'Partnereink';
-$oldalCss = 'assets/partnereink.css'; // Oldalspecifikus stílus
+$oldalCss = 'assets/partnereink.css';
 
-// Szakmák szerinti blokkos megjelenítés (egyelőre ki)
-$SZAKMANKENT = false;
-
-// A partnerek listájának betöltése
 $PARTNEREK = require __DIR__ . '/includes/partnereinkAdatok.php';
 
-require __DIR__ . '/includes/header.php';
+/*
+ * A partneradatok összegyűjtése.
+ * Kezeli azt is, ha a partnerek több szinten vannak
+ * az adatok tömbjében.
+ */
+function partnerekOsszegyujtese($adatok): array
+{
+    $eredmeny = [];
 
-// Csoportok: kikapcsolt bontásnál egyetlen, cím nélküli csoport
-$csoportok = partner_csoportok($PARTNEREK, $SZAKMANKENT);
+    if (!is_array($adatok)) {
+        return $eredmeny;
+    }
+
+    foreach ($adatok as $adat) {
+
+        // Ha ez már egy konkrét partner
+        if (
+            is_array($adat) &&
+            array_key_exists('nev', $adat)
+        ) {
+            $eredmeny[] = [
+                'nev' => (string) $adat['nev'],
+                'url' => !empty($adat['url'])
+                    ? (string) $adat['url']
+                    : null
+            ];
+
+            continue;
+        }
+
+        // Ha egy újabb tömbszint következik
+        if (is_array($adat)) {
+            $eredmeny = array_merge(
+                $eredmeny,
+                partnerekOsszegyujtese($adat)
+            );
+        }
+    }
+
+    return $eredmeny;
+}
+
+$PARTNEREK = partnerekOsszegyujtese($PARTNEREK);
+
+
+/*
+ * Ábécésorrend
+ */
+usort($PARTNEREK, function ($a, $b) {
+    return strcasecmp($a['nev'], $b['nev']);
+});
+
+
+require __DIR__ . '/includes/header.php';
 ?>
 
 <h1>Partnereink</h1>
 
-<?php foreach ($csoportok as $csoport): ?>
+<p class="partnerek-bevezeto">
+    Közös munkánk alapját megbízható iskolai és vállalati partnereink adják.
+    Együtt azért dolgozunk, hogy tanulóink a képzés mellett valódi szakmai
+    tapasztalatot is szerezhessenek.
+</p>
 
-    <!-- Csoportcím (csak szakmák szerinti bontásnál) -->
-    <?php if ($csoport['cim'] !== null): ?>
-        <h2 class="partner-csoport-cim"><?= e($csoport['cim']) ?></h2>
-    <?php endif; ?>
+
+<section class="partner-szekcio">
+
+    <div class="partner-cim">
+        <h2>Partnereink</h2>
+
+        <p>
+            Iskolai és vállalati partnereink listája.
+            Ahol elérhető, a partner nevére kattintva megnyitható a hivatalos weboldal.
+        </p>
+    </div>
+
 
     <div class="partnerek">
 
-        <?php foreach ($csoport['partnerek'] as $partner): ?>
+        <?php foreach ($PARTNEREK as $partner): ?>
 
             <div class="partner-kartya">
 
                 <?php if (!empty($partner['url'])): ?>
 
-                    <!-- Van weboldal: új lapon megnyíló link -->
                     <a
                         href="<?= e($partner['url']) ?>"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <?= e($partner['nev']) ?>
+
+                        <span class="partner-nev">
+                            <?= e($partner['nev']) ?>
+                        </span>
+
+                        <span class="partner-link">
+                            Weboldal megnyitása →
+                        </span>
+
                     </a>
 
                 <?php else: ?>
 
-                    <!-- Nincs weboldal: csak a név -->
-                    <span>
+                    <span class="partner-nev">
                         <?= e($partner['nev']) ?>
                     </span>
 
@@ -67,6 +123,7 @@ $csoportok = partner_csoportok($PARTNEREK, $SZAKMANKENT);
 
     </div>
 
-<?php endforeach; ?>
+</section>
+
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
