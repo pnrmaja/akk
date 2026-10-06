@@ -41,9 +41,9 @@ function menu_adatok(): array
             ['label' => 'Képzőközpontunk', 'href' => '#'], // Még nincs hozzá oldal
         ]],
 
-        ['label' => 'Képzéseink', 'children' => [
+        
             ['label' => 'Szakmáink', 'href' => 'szakmaink.php', 'children' => $szakmaGyerekek],
-        ]],
+        
 
         ['label' => 'Partnereink', 'href' => 'partnereink.php'],
         ['label' => 'Híreink',     'href' => 'hireink.php'],
