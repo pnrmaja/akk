@@ -24,6 +24,6 @@ require __DIR__ . '/includes/header.php';
     <p>A képzésekre szakképző intézmények tanulói, képzésben résztvevői jelentkezhetnek. A tanulók az ágazati alapvizsga letétele után tudnak bekapcsolódni a duális képzésbe.</p>
 
     <!-- Szakképzési munkaszerződés és bérezés -->
-    <p>A képzés idejére a diákok a Képzőközponttal szakképzési munkaszerződést kötnek, havi bruttó 100 ezer (nappali), illetve 50 ezer (esti) forintos bérezéssel.</p>
+    <p>A képzés idejére a diákok a Képzőközponttal szakképzési munkaszerződést kötnek, havi bruttó 100 ezer (tanulói jogviszony esetén), illetve 50 ezer (felnőttképzési jogviszony esetén) forintos bérezéssel.</p>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
