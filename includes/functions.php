@@ -5,6 +5,7 @@
  * Közös segédfüggvények az egész weboldalhoz:
  *   - kimenet escape-elése (XSS elleni védelem)
  *   - képzési adatok betöltése és szűrése
+ *   - ábécé szerinti rendezés és a partnerek csoportosítása
  *   - szakma-azonosítók és URL-ek előállítása
  *
  * Betöltő: includes/header.php (require_once), valamint közvetlenül a
@@ -58,6 +59,110 @@ function varosok(): array
 
 
 /* ==========================================================================
+   ABC-SORRENDEZÉS
+   ========================================================================== */
+
+/**
+ * Két szöveg összehasonlítása magyar ábécé szerint (cs, gy, ly, ny, sz,
+ * ty, zs külön betűként). Az intl bővítmény Collator osztályát használja;
+ * ha az nincs telepítve, ékezetmentesített összehasonlításra esik vissza.
+ *
+ * @param string $a Az első szöveg.
+ * @param string $b A második szöveg.
+ * @return int      Negatív, nulla vagy pozitív, mint a strcmp().
+ */
+function abc_osszehasonlit(string $a, string $b): int
+{
+    static $collator = null;
+    static $probalt  = false;
+
+    // A Collator példányt egyszer hozzuk létre
+    if (!$probalt) {
+        $probalt  = true;
+        $collator = class_exists('Collator') ? new Collator('hu_HU') : null;
+    }
+
+    if ($collator !== null) {
+        return $collator->compare($a, $b);
+    }
+
+    // Tartalék: kisbetűsítés és ékezetek lecserélése
+    $kulcs = fn(string $s): string => strtr(mb_strtolower($s, 'UTF-8'), [
+        'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ö' => 'o', 'ő' => 'o',
+        'ú' => 'u', 'ü' => 'u', 'ű' => 'u',
+    ]);
+    return strcmp($kulcs($a), $kulcs($b));
+}
+
+/**
+ * Elemek ábécé szerinti rendezése egy mező alapján (az eredeti tömb
+ * változatlan marad).
+ *
+ * @param array[] $lista Rendezendő elemek.
+ * @param string  $mezo  A rendezés alapjául szolgáló mező (pl. "nev").
+ * @return array[]       A rendezett, újraindexelt lista.
+ */
+function abc_rendez(array $lista, string $mezo): array
+{
+    usort($lista, fn(array $a, array $b) => abc_osszehasonlit($a[$mezo], $b[$mezo]));
+    return $lista;
+}
+
+
+/* ==========================================================================
+   PARTNEREK CSOPORTOSÍTÁSA
+   ========================================================================== */
+
+/**
+ * A partnerek ábécé szerint rendezve, csoportokba osztva a megjelenítéshez.
+ *
+ * $szakmankent = false: egyetlen, cím nélküli csoport (jelenlegi nézet).
+ * $szakmankent = true:  szakmánként egy csoport (a partner opcionális
+ *                       'szakmak' mezője alapján; egy partner több
+ *                       csoportban is szerepelhet). A szakma nélküli
+ *                       partnerek a lista végén, "Egyéb partnerek" címmel
+ *                       kerülnek.
+ *
+ * @param array[] $partnerek    A partnereinkAdatok.php tömbje.
+ * @param bool    $szakmankent  Szakmák szerinti bontás be/ki.
+ * @return array[]              Csoportok: ['cim' => ?string, 'partnerek' => array[]].
+ */
+function partner_csoportok(array $partnerek, bool $szakmankent = false): array
+{
+    $partnerek = abc_rendez($partnerek, 'nev');
+
+    if (!$szakmankent) {
+        return [['cim' => null, 'partnerek' => $partnerek]];
+    }
+
+    // Partnerek gyűjtése szakmánként (a sorrend a rendezett listából öröklődik)
+    $csoportok = [];
+    $egyeb     = [];
+    foreach ($partnerek as $partner) {
+        if (empty($partner['szakmak'])) {
+            $egyeb[] = $partner;
+            continue;
+        }
+        foreach ($partner['szakmak'] as $szakma) {
+            $csoportok[$szakma][] = $partner;
+        }
+    }
+
+    // A csoportok is ábécé szerint követik egymást
+    uksort($csoportok, fn($a, $b) => abc_osszehasonlit((string) $a, (string) $b));
+
+    $eredmeny = [];
+    foreach ($csoportok as $cim => $lista) {
+        $eredmeny[] = ['cim' => (string) $cim, 'partnerek' => $lista];
+    }
+    if ($egyeb) {
+        $eredmeny[] = ['cim' => 'Egyéb partnerek', 'partnerek' => $egyeb];
+    }
+    return $eredmeny;
+}
+
+
+/* ==========================================================================
    JOGVISZONY-SZŰRÉS
    ========================================================================== */
 
@@ -95,11 +200,12 @@ function jogviszony_illeszkedik(string $kepzesJogviszony, string $tipus): bool
 
 /**
  * Képzések szűrése településre és/vagy jogviszonyra.
- * A két szűrő egymástól függetlenül kombinálható.
+ * A két szűrő egymástól függetlenül kombinálható. Az eredmény a szakma
+ * neve szerint ábécé sorrendben van.
  *
  * @param string|null $varos      Település neve; null = nincs szűrés.
  * @param string|null $jogviszony Jogviszony-kulcs; null = nincs szűrés.
- * @return array[]                A szűrt, újraindexelt lista.
+ * @return array[]                A szűrt, ábécé szerint rendezett lista.
  */
 function szurt_kepzesek(?string $varos, ?string $jogviszony = null): array
 {
@@ -115,7 +221,8 @@ function szurt_kepzesek(?string $varos, ?string $jogviszony = null): array
         $lista = array_filter($lista, fn(array $k) => jogviszony_illeszkedik($k['jogviszony'], $jogviszony));
     }
 
-    return array_values($lista);
+    // Alapértelmezett sorrend: a szakma neve szerint ábécében
+    return abc_rendez(array_values($lista), 'nev');
 }
 
 

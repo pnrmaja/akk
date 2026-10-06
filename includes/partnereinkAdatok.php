@@ -3,11 +3,15 @@
  * includes/partnereinkAdatok.php
  *
  * A Partnereink oldal (partnereink.php) adatai. Mezők:
- *   nev - a partner neve
- *   url - a partner weboldala; null, ha nincs (ilyenkor sima szövegként jelenik meg)
+ *   nev     - a partner neve
+ *   url     - a partner weboldala; null, ha nincs (ilyenkor sima szövegként jelenik meg)
+ *   szakmak - opcionális: azon szakmák nevei (az adatok.php 'nev' mezői), amelyekhez
+ *             a partner tartozik, pl. 'szakmak' => ['Villanyszerelő', 'Asztalos'].
+ *             Csak akkor számít, ha a partnereink.php-ban a $SZAKMANKENT be van
+ *             kapcsolva; egyelőre nem kell megadni.
  *
- * Új partner felvétele: új elem a tömb végére (vagy tetszőleges helyére);
- * a sorrend egyben a megjelenítés sorrendje.
+ * Új partner felvétele: új elem a tömbbe, tetszőleges helyre. A sorrend nem
+ * számít: az oldal a partnereket automatikusan ábécé sorrendben jeleníti meg.
  */
 declare(strict_types=1);
 
