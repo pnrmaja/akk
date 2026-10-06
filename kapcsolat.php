@@ -1,57 +1,161 @@
 <?php
 /**
  * kapcsolat.php - Kapcsolat
- *
- * Elérhetőségi kártyák. Az adatok az includes/kapcsolatAdatok.php-ban
- * szerkeszthetők.
  */
 
-// FIGYELEM: fejlesztői hibakijelzés. Éles üzemben ezt a sort el kell távolítani.
-ini_set('display_errors', '1'); error_reporting(E_ALL);
-
 $oldalCim = 'Kapcsolat – Szalézi AKK';
-$oldalCss = 'assets/kapcsolat.css'; // Oldalspecifikus stílus
-
-// A kapcsolati kártyák adatainak betöltése
-$KAPCSOLAT = require __DIR__ . '/includes/kapcsolatAdatok.php';
+$oldalCss = 'assets/kapcsolat.css';
 
 require __DIR__ . '/includes/header.php';
 ?>
 
 <div class="kapcsolat-oldal">
+
     <h1>Kapcsolat</h1>
-    <p class="kapcsolat-bevezeto">Keressen bennünket bizalommal az alábbi elérhetőségeken!</p>
 
-    <div id="kapcsolat-tartalom">
-        <?php foreach ($KAPCSOLAT as $elem): ?>
-            <section class="kapcsolat-kartya">
-                <div class="kapcsolat-ikon"><?= e($elem['ikon'] ?? '') ?></div>
-                <h2><?= e($elem['cim']) ?></h2>
+    <p class="kapcsolat-bevezeto">
+        Keressen bennünket bizalommal az alábbi elérhetőségeken!
+    </p>
 
-                <!-- Megjegyzés (opcionális) -->
-                <?php if (!empty($elem['megjegyzes'])): ?>
-                    <p class="kapcsolat-megjegyzes"><?= e($elem['megjegyzes']) ?></p>
-                <?php endif; ?>
 
-                <!-- Személy neve (opcionális) -->
-                <?php if (!empty($elem['nev'])): ?>
-                    <p class="kapcsolat-nev"><?= e($elem['nev']) ?></p>
-                <?php endif; ?>
+    <!-- =========================================
+         VEZETŐK ÉS TANULMÁNYI OSZTÁLY
+         ========================================= -->
 
-                <!-- Adatsorok: felirat + érték (linkként, ha van href) -->
-                <?php foreach ($elem['sorok'] as $sor): ?>
-                    <p class="kapcsolat-sor">
-                        <span class="kapcsolat-felirat"><?= e($sor['felirat']) ?></span>
-                        <?php if (!empty($sor['href'])): ?>
-                            <a href="<?= e($sor['href']) ?>"><?= e($sor['ertek']) ?></a>
-                        <?php else: ?>
-                            <?= e($sor['ertek']) ?>
-                        <?php endif; ?>
-                    </p>
-                <?php endforeach; ?>
-            </section>
-        <?php endforeach; ?>
-    </div>
+    <section class="kapcsolat-csoport">
+
+        <div class="kapcsolat-csoport-fejlec">
+            <h2>Kapcsolattartóink</h2>
+        </div>
+
+        <div class="kapcsolat-racs">
+
+            <!-- Ügyvezető igazgató -->
+            <article class="kapcsolat-kartya">
+
+                <div class="kapcsolat-ikon">
+                    👤
+                </div>
+
+                <h3>Ügyvezető igazgató</h3>
+
+                <p class="kapcsolat-nev">
+                    Kovács Levente
+                </p>
+
+                <a href="mailto:kovacs.levente@akkszalezi.hu">
+                    kovacs.levente@akkszalezi.hu
+                </a>
+
+            </article>
+
+
+            <!-- Szakmai referens -->
+            <article class="kapcsolat-kartya">
+
+                <div class="kapcsolat-ikon">
+                    👤
+                </div>
+
+                <h3>Szakmai referens</h3>
+
+                <p class="kapcsolat-nev">
+                    Halász-Máté Gabriella
+                </p>
+
+                <a href="mailto:halasz.gabriella@akkszalezi.hu">
+                    halasz.gabriella@akkszalezi.hu
+                </a>
+
+            </article>
+
+
+            <!-- Tanulmányi osztály -->
+            <article class="kapcsolat-kartya">
+
+                <div class="kapcsolat-ikon">
+                    🎓
+                </div>
+
+                <h3>Tanulmányi osztály</h3>
+
+                <p class="kapcsolat-nev">
+                    Varga Melinda
+                </p>
+
+                <a href="mailto:varga.melinda@akkszalezi.hu">
+                    varga.melinda@akkszalezi.hu
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ELÉRHETŐSÉGEK ÉS IGAZOLÁSOK
+         ========================================= -->
+
+    <section class="kapcsolat-csoport">
+
+        <div class="kapcsolat-csoport-fejlec">
+            <h2>Elérhetőségek és ügyintézés</h2>
+        </div>
+
+        <div class="kapcsolat-racs masodik-sor">
+
+            <!-- Általános elérhetőség -->
+            <article class="kapcsolat-kartya">
+
+                <div class="kapcsolat-ikon">
+                    📞
+                </div>
+
+                <h3>Elérhetőségek</h3>
+
+                <p>
+                    <strong>Email:</strong><br>
+                    <a href="mailto:kepzohely@akkszalezi.hu">
+                        kepzohely@akkszalezi.hu
+                    </a>
+                </p>
+
+                <p>
+                    <strong>Telefonszám:</strong><br>
+                    <a href="tel:+36202320517">
+                        06 20 / 232 0517
+                    </a>
+                </p>
+
+            </article>
+
+
+            <!-- Igazolások -->
+            <article class="kapcsolat-kartya">
+
+                <div class="kapcsolat-ikon">
+                    📄
+                </div>
+
+                <h3>Tanulóink figyelmébe</h3>
+
+                <p class="kapcsolat-megjegyzes">
+                    Táppénzes igazolások esetén
+                </p>
+
+                <a href="mailto:igazolas@akkszalezi.hu">
+                    igazolas@akkszalezi.hu
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
 </div>
+
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
