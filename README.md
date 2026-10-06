@@ -10,6 +10,9 @@ fejléc/lábléc + menürendszer, amit egyetlen helyen kell karbantartani.
 - PHP 8.0 vagy újabb (a kód `declare(strict_types=1)`-et és `match`
   kifejezést használ).
 - Külső csomag vagy adatbázis nem szükséges, minden adat PHP-tömbökben van.
+- Ajánlott: az `intl` PHP-bővítmény, amely a magyar ábécé szerinti
+  rendezést adja (lásd „Rendezés"). Nélküle az oldal működik, de a
+  rendezés egyszerűsített.
 
 Fejlesztői szerver indítása a projekt gyökeréből:
 
@@ -32,7 +35,7 @@ Fejlesztői szerver indítása a projekt gyökeréből:
 │   ├── header.php              – <head>, fejléc-kép, <nav>, <main> nyitása
 │   ├── footer.php              – </main>, lábléc, </body>, </html>
 │   ├── nav.php                 – menüadatok + menü kirajzolása (rekurzív)
-│   ├── functions.php           – segédfüggvények: escape, adatbetöltés, szűrés, URL-ek
+│   ├── functions.php           – segédfüggvények: escape, adatbetöltés, szűrés, rendezés, URL-ek
 │   ├── adatok.php              – a képzések alapadatai (szakmaink + reszletek)
 │   ├── reszletekAdatok.php     – a szakmák részletes leírás-blokkjai
 │   ├── dualisKepzesAdatok.php  – a Duális képzés oldal szöveges blokkjai
@@ -98,6 +101,9 @@ require __DIR__ . '/includes/header.php';
   `<nav>`-ot, majd megnyitja a `<main>`-t.
 - `footer.php` lezárja a `<main>`-t, kirajzolja a láblécet, majd a
   `</body></html>`-t.
+- Mivel a `functions.php` a `header.php`-n keresztül töltődik be, az oldal
+  saját kódjában a segédfüggvényeket (pl. `partner_csoportok()`) a
+  `require header.php` UTÁN lehet hívni.
 
 ## Menürendszer (`includes/nav.php`)
 
@@ -124,19 +130,33 @@ require __DIR__ . '/includes/header.php';
 | `e(string): string` | `htmlspecialchars` rövidítése, `ENT_QUOTES \| ENT_SUBSTITUTE`, UTF-8. **Minden** dinamikus, felhasználó vagy adat által vezérelt kiírásnál ezt kell használni XSS ellen. |
 | `kepzesek(): array` | Betölti (és `static` gyorsítótárazza egy kérésen belül) az `includes/adatok.php` tömböt. |
 | `varosok(): array` | A képzésekben előforduló egyedi települések listája, az adatok sorrendjében. |
+| `abc_osszehasonlit(string $a, string $b): int` | Két szöveg összehasonlítása magyar ábécé szerint (cs, gy, ly, ny, sz, ty, zs külön betűként). Az `intl` `Collator` osztályát használja; ha az nincs telepítve, ékezetmentesített összehasonlításra esik vissza. |
+| `abc_rendez(array $lista, string $mezo): array` | Elemek ábécé szerinti rendezése egy mező alapján (pl. `'nev'`); az eredeti tömböt nem módosítja. |
+| `partner_csoportok(array $partnerek, bool $szakmankent = false): array` | A partnerek ábécé szerint rendezve, megjelenítési csoportokba osztva (`['cim' => ?string, 'partnerek' => array]`). Kikapcsolt bontásnál egyetlen, cím nélküli csoport; bekapcsolva szakmánként egy csoport (a partnerek `szakmak` mezője alapján), a szakma nélküliek „Egyéb partnerek" címmel a végén. |
 | `jogviszony_tipusok(): array` | A szűrhető jogviszony-kategóriák: kulcs (URL-paraméterhez) → megjelenítendő címke. Jelenleg: `tanuloi` → „Tanulói jogviszony", `felnottkepzesi` → „Felnőttképzési jogviszony". |
 | `jogviszony_illeszkedik(string $kepzesJogviszony, string $tipus): bool` | Egy képzés `jogviszony` mezője illeszkedik-e a kategóriára. Részszöveg-egyezést vizsgál (`str_contains`), mert néhány képzésnél a mező kombinált (pl. „tanulói-, felnőttképzési jogviszony") – ezek mindkét szűrőnél megjelennek. |
-| `szurt_kepzesek(?string $varos, ?string $jogviszony = null): array` | Képzések szűrése településre és/vagy jogviszony-kategóriára. `null` paraméter = az adott dimenzióban nincs szűrés. A két szűrő kombinálható. |
+| `szurt_kepzesek(?string $varos, ?string $jogviszony = null): array` | Képzések szűrése településre és/vagy jogviszony-kategóriára, az eredmény a szakma neve szerint ábécé sorrendben. `null` paraméter = az adott dimenzióban nincs szűrés. A két szűrő kombinálható. |
 | `szakma_szuro_url(?string $varos, ?string $jogviszony): string` | A `szakmaink.php` szűrőlinkjeihez generál URL-t úgy, hogy az egyik szűrő módosításakor a másik megmarad. |
 | `szakma_id(array $kepzes): string` | A szakma URL-barát azonosítója: `4 0722 08 01` → `4-0722-08-01`. |
 | `szakma_url(array $kepzes): string` | A szakma részletek oldalának URL-je: `reszletek.php?id=…`. |
 | `kepzes_azonosito_alapjan(string $id): ?array` | Képzés keresése az URL-ben kapott (kötőjeles) azonosító alapján; `null`, ha nincs ilyen. |
 | `kepzes_reszletek(string $azonosito): array` | Egy szakma részletes leírás-blokkjai a `reszletekAdatok.php`-ból (kulcs: az eredeti, szóközös azonosító); üres tömb, ha nincs. |
 
+## Rendezés
+
+- A **Szakmáink** és a **Partnereink** oldal listája alapból ábécé sorrendben
+  jelenik meg; az adatfájlokban a tömbelemek sorrendje ezért nem számít.
+- A rendezés magyar ábécé szerint történik (`abc_osszehasonlit()`), ehhez az
+  `intl` PHP-bővítmény kell. Nélküle az ékezetek figyelmen kívül maradnak,
+  de a kétjegyű betűket (cs, sz, zs …) nem kezeli külön.
+- A település-szűrősáv és a menü almenüje **nem** ábécé szerint, hanem az
+  adatok sorrendjében követi a településeket (`varosok()`).
+
 ## Képzési adatok (`includes/adatok.php`)
 
-Egy sima PHP tömb, minden elem egy asszociatív tömb. A tömb sorrendje a
-megjelenítés sorrendje. Mezők:
+Egy sima PHP tömb, minden elem egy asszociatív tömb. A megjelenítés
+sorrendjét a Szakmáink oldalon az ábécé adja (a tömb sorrendje nem
+számít). Mezők:
 
 | Mező | Kötelező | Leírás |
 |---|---|---|
@@ -163,8 +183,9 @@ egyéb (szűrők, menü, kártyalista) automatikusan frissül.
 - A `<title>` és az oldal `$oldalCim`-je tükrözi az aktív szűrő(ke)t
   (pl. „Szakmáink – Budapest, Tanulói jogviszony – Szalézi AKK").
 - A találati lista kártyákként jelenik meg (`#kepzesek` → `.kepzes-kartya`
-  elemek); a teljes kártya kattintható, és a részletek oldalra visz. Ha a
-  szűrés eredménye üres, „Nincs megjeleníthető képzés." szöveg jelenik meg.
+  elemek), a szakma neve szerint ábécé sorrendben; a teljes kártya
+  kattintható, és a részletek oldalra visz. Ha a szűrés eredménye üres,
+  „Nincs megjeleníthető képzés." szöveg jelenik meg.
 
 ## Szakma részletek oldal (`reszletek.php` + `includes/reszletekAdatok.php`)
 
@@ -198,10 +219,25 @@ egyéb (szűrők, menü, kártyalista) automatikusan frissül.
 
 ## Partnereink oldal (`partnereink.php` + `includes/partnereinkAdatok.php`)
 
-- Az adatfájl `nev` / `url` párok listája. Ha az `url` nem üres, a név új
-  lapon megnyíló linkként jelenik meg (`rel="noopener noreferrer"`),
-  egyébként sima szövegként (`null` érték).
+- Az adatfájl partnerek listája. Mezők: `nev`, `url` és opcionálisan
+  `szakmak`. Ha az `url` nem üres, a név új lapon megnyíló linkként jelenik
+  meg (`rel="noopener noreferrer"`), egyébként sima szövegként (`null`
+  érték).
+- A partnerek **ábécé sorrendben** jelennek meg (a `partner_csoportok()`
+  rendezi őket), így az adatfájlban a sorrend nem számít.
 - Rácsos elrendezés (3 oszlop, telefonon 1), stílus: `assets/partnereink.css`.
+- **Szakmák szerinti blokkok (előkészítve, jelenleg kikapcsolva):** a
+  `partnereink.php` tetején a `$SZAKMANKENT` változó vezérli. `false`
+  esetén az oldal egyetlen, cím nélküli rácsot ír ki (a jelenlegi nézet).
+  Bekapcsolásához:
+  1. a partnereknél meg kell adni a `szakmak` mezőt, pl.
+     `'szakmak' => ['Villanyszerelő', 'Asztalos']` (az `adatok.php` `nev`
+     értékei); egy partner több szakmánál is szerepelhet;
+  2. a `$SZAKMANKENT` értékét `true`-ra kell állítani.
+
+  Ekkor szakmánként egy-egy blokk jelenik meg `<h2 class="partner-csoport-cim">`
+  címmel (a blokkok és a bennük lévő partnerek is ábécé szerint), a
+  szakma nélküli partnerek pedig „Egyéb partnerek" blokkban a végén.
 - Új partner: új `['nev' => …, 'url' => …]` elem az adatfájlban.
 
 ## Kapcsolat oldal (`kapcsolat.php` + `includes/kapcsolatAdatok.php`)
@@ -252,14 +288,15 @@ kedvéért érdemes lenne itt is `e()`-re váltani.
 
 | Feladat | Hol |
 |---|---|
-| Új képzés/szakma | `includes/adatok.php` – új tömbelem |
+| Új képzés/szakma | `includes/adatok.php` – új tömbelem (a sorrend az ábécé szerint automatikus) |
 | Szakma részletes leírása | `includes/reszletekAdatok.php` – új kulcs az `azonosito` értékével, blokkokkal |
 | Új település | Csak egy új `varos` érték az adatok között – a szűrő és a menü automatikusan felveszi |
 | Új jogviszony-kategória a szűrőhöz | `includes/functions.php` – `jogviszony_tipusok()` és `jogviszony_illeszkedik()` bővítése |
 | Új statikus oldal | Új `.php` fájl a gyökérben, a header/footer mintát követve, + link a `nav.php`-ban |
 | Új menüpont/almenü | `includes/nav.php` – `menu_adatok()` tömbje |
 | Új „Duális képzés" infóblokk | `includes/dualisKepzesAdatok.php` – új elem |
-| Új partner | `includes/partnereinkAdatok.php` – új elem |
+| Új partner | `includes/partnereinkAdatok.php` – új elem (a sorrend az ábécé szerint automatikus) |
+| Partnerek szakmák szerinti blokkjai | `szakmak` mező a partnereknél + `$SZAKMANKENT = true` a `partnereink.php`-ban |
 | Új kapcsolati kártya | `includes/kapcsolatAdatok.php` – új elem (és a lábléc, ha ott is szerepel) |
 | Új galériakép | kép az `assets/galeria/` mappába + fájlnév a `galeria.php` `$kepek` tömbjébe |
 | Új hír | kép az `assets/hirek/` mappába + új elem a `hireink.php` `$hirek` tömbjébe |

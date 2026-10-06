@@ -25,6 +25,16 @@
 
 
 /* --------------------------------------------------------------------------
+   Szakmák szerinti blokkok címe
+   (csak akkor látszik, ha a partnereink.php-ban a $SZAKMANKENT be van
+   kapcsolva; egyébként nincs ilyen elem az oldalon)
+   -------------------------------------------------------------------------- */
+
+.partner-csoport-cim { margin: 35px 0 0; font-size: 22px; }
+.partner-csoport-cim + .partnerek { margin-top: 15px; }
+
+
+/* --------------------------------------------------------------------------
    Partnernév: link (van weboldal) vagy halvány szöveg (nincs weboldal)
    -------------------------------------------------------------------------- */
 
