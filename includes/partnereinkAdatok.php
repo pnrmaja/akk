@@ -315,7 +315,7 @@ return [
     ],
 
     //ideiglenesen kikommentezve aamíg a kategória nincsen hozzájuk
-    [
+    /*[
         'nev' => 'Nemzeti Élelmiszerlánc-biztonsági Hivatal',
         'url' => 'https://portal.nebih.gov.hu/'
     ],
@@ -378,5 +378,5 @@ return [
     [
         'nev' => 'Herman Ottó Intézet Nonprofit Kft.',
         'url' => 'https://www.hermanottointezet.hu/'
-    ],
+    ],*/
 ];

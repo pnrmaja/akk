@@ -45,7 +45,7 @@ function menu_adatok(): array
         
 
         ['label' => 'Partnereink', 'href' => 'partnereink.php'],
-        ['label' => 'Híreink',     'href' => 'hireink.php'],
+        //['label' => 'Híreink',     'href' => 'hireink.php'],
         ['label' => 'Galéria',     'href' => 'galeria.php'],
         ['label' => 'Dokumentumok', 'href' => 'dokumentumok.php'],
         ['label' => 'Kapcsolat',   'href' => 'kapcsolat.php'],
