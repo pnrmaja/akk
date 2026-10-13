@@ -100,222 +100,222 @@ return [
     ],
     [
         'nev' => 'All4Office',
-        'url' => null,
+        'url' => 'https://www.all4office.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Csömör Nagyközség Önkormányzata',
-        'url' => null,
+        'url' => 'https://csomor.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Ferencvárosi Egészségügyi Szolgálat',
-        'url' => null,
+        'url' => 'https://feszrendelo.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'HungaroControl Zrt.',
-        'url' => null,
+        'url' => 'https://www.hungarocontrol.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Élelmiszerlánc-biztonsági Centrum Nonprofit Kft. (ÉLBC Kft.)',
-        'url' => null,
+        'url' => 'https://www.elbc.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Pázmány Péter Katolikus Egyetem',
-        'url' => null,
+        'url' => 'https://ppke.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'P.U.B. Kft.',
-        'url' => null,
+        'url' => 'https://www.nemzeticegtar.hu/pub-kft-e10265569.html',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Special Effects Zrt.',
-        'url' => null,
+        'url' => 'https://www.nemzeticegtar.hu/special-effects-zrt-e10482564.html',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Újpesti Egészségközpont',
-        'url' => null,
+        'url' => 'https://www.ujpestiszakrendelo.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'One Magyarország Zrt.',
-        'url' => null,
+        'url' => 'https://www.one.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Váci Jávorszky Ödön Kórház',
-        'url' => null,
+        'url' => 'https://www.javorszky.hu/wordpress/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Filia Kereskedelmi és Szolgáltató Kft.',
-        'url' => null,
+        'url' => 'https://filiakft.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'Újhartyáni Általános Iskola',
-        'url' => null,
+        'url' => 'https://nemetiskola.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'DPD Hungary Kft.',
-        'url' => null,
+        'url' => 'https://www.dpd.com/hu/hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'Euro-Profil Kft.',
-        'url' => null,
+        'url' => 'https://europrofil.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'MOL',
-        'url' => null,
+        'url' => 'https://mol.hu/hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'Magyar Máltai Szeretetszolgálat Egyesület',
-        'url' => null,
+        'url' => 'https://www.maltai.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'Nokia Solutions and Networks Kft.',
-        'url' => null,
+        'url' => 'https://www.nokia.com/',
         'szakmak' => ['Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'Hotel Adalbert',
-        'url' => null,
+        'url' => 'https://www.hoteladalbert.hu/index.php/hu/',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'Péliföldszentkereszt- Gerecse Natúrpark Látogatóközpont',
-        'url' => null,
+        'url' => 'https://www.pelifoldszentkereszt.hu/?utm_source=gmb&utm_medium=referral',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'Szent Arnold Lelkigyakorlatos Ház',
-        'url' => null,
+        'url' => 'https://www.szentarnold.hu/',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'Cityrama',
-        'url' => null,
+        'url' => 'https://www.cityrama.hu/',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'BuildLog',
-        'url' => null,
+        'url' => 'https://build-log.hu/en/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Hopi Global Solution',
-        'url' => null,
+        'url' => 'https://hopiglobal.eu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'HOPI Hungária Kft.',
-        'url' => null,
+        'url' => 'https://hopilogistics.eu/hu-HU',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Miller Logisztika',
-        'url' => null,
+        'url' => 'https://millerlogisztika.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Profirent Gépkölcsönző Kft.',
-        'url' => null,
+        'url' => 'https://www.profirent.hu/?gad_source=1&gad_campaignid=15146390380&gbraid=0AAAAADzzPc9qLWsu1DNmwDty5d6KUljtt&gclid=CjwKCAjwrbfWBhAeEiwAc2e6PqKsMgDq0ZDzhvI8DtwjXfJjwLzehnbWOEGlcuOLRkiRpnxTCnsa6xoCiIsQAvD_BwE',
         'szakmak' => ['Logisztikai technikus', 'Mechatronikai technikus']
     ],
     [
         'nev' => 'RaorgTrans',
-        'url' => null,
+        'url' => 'https://raorgtrans.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'TERRA Hungária Építőgép Kft.',
-        'url' => null,
+        'url' => 'https://www.terra-world.hu/?gad_source=1&gad_campaignid=12349471189&gbraid=0AAAAADRfTzzNN9pfjcnBHTwPtsGXNPGcd&gclid=CjwKCAjwrbfWBhAeEiwAc2e6PriT_W8h-fWUcCxptpckpQ8oamdKynb2n-JQQfC6rJEqKrMlCUiv6RoCKxoQAvD_BwE',
         'szakmak' => ['Logisztikai technikus', 'Mechatronikai technikus']
     ],
     [
         'nev' => 'TRANSDANUBIA Logisztikai Kft',
-        'url' => null,
+        'url' => 'https://transdanubia.eu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Copy Depo',
-        'url' => null,
+        'url' => 'https://copydepo.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Orink Hungaria',
-        'url' => null,
+        'url' => 'https://orink.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Lando Eurasia Kft.',
-        'url' => null,
+        'url' => 'https://lando.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'HILLTOP LOGISZTIKAI Kft.',
-        'url' => null,
+        'url' => 'https://hilltoplog.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'László Trans',
-        'url' => null,
+        'url' => 'https://hosziget.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Logmaster Kft.',
-        'url' => null,
+        'url' => 'https://www.logmaster.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Sebestyén Intertransport Kft',
-        'url' => null,
+        'url' => 'https://nemzetkoziszallitas.eu/?gad_source=1&gad_campaignid=1641239202&gbraid=0AAAAADdkmx_a8Lz6k3otOh4QX68u6SSnU&gclid=CjwKCAjwrbfWBhAeEiwAc2e6PqyfLSVXac0JCMrXX_P0CBWXyITROfyoiPyLczWyxNSKST9KQcLOPBoC8jkQAvD_BwE',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'DCS Juicer Kft.',
-        'url' => null,
+        'url' => 'https://www.dcsjuicer.com/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'UNICRANES',
-        'url' => null,
+        'url' => 'https://unicranes.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'FestiPay Zrt.',
-        'url' => null,
+        'url' => 'https://festipay.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Szido Kft.',
-        'url' => null,
+        'url' => 'https://esbe.eu/group/contact/europe/hungary/szido-kft',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'SZERVIZ-TRANS Kft.',
-        'url' => null,
+        'url' => 'https://kontenersitt.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'RESRG Automotive HU Kft.',
-        'url' => null,
+        'url' => 'https://www.facebook.com/wujhartyan/',
         'szakmak' => ['Mechatronikai technikus']
-    ]
+    ],
 
     //ideiglenesen kikommentezve aamíg a kategória nincsen hozzájuk
-    /*[
+    [
         'nev' => 'Nemzeti Élelmiszerlánc-biztonsági Hivatal',
         'url' => 'https://portal.nebih.gov.hu/'
     ],
@@ -349,7 +349,7 @@ return [
     ],
     [
         'nev' => 'PaGeTo IT Kft.',
-        'url' => null
+        'url' => 'https://www.ceginformacio.hu/cr9312212073'
     ],
     [
         'nev' => 'Poli Computer PC Kft.',
@@ -378,5 +378,5 @@ return [
     [
         'nev' => 'Herman Ottó Intézet Nonprofit Kft.',
         'url' => 'https://www.hermanottointezet.hu/'
-    ],*/
+    ],
 ];

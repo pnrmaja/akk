@@ -10,7 +10,7 @@ $oldalCss = 'assets/galeria.css';
 $galeriak = [
     [
         'id' => 'akk',
-        'cim' => 'Szalézi Ágazati Képzőközpont',
+        'cim' => 'Szalézi Ágazati Képzőközpont Székhelye',
         'leiras' => 'Az AKK termei és oktatási környezete.',
         'mappa' => 'assets/galeria/akk/',
         'kepek' => [
