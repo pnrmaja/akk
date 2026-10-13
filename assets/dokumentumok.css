@@ -1,0 +1,136 @@
+
+.dokumentumok-oldal {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 45px 25px 70px;
+}
+
+.dokumentumok-oldal h1 {
+    margin-bottom: 15px;
+    font-size: 38px;
+}
+
+.dokumentumok-bevezeto {
+    max-width: 750px;
+    margin-bottom: 35px;
+    color: #555;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+
+.dokumentumok-racs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.dokumentum-kartya {
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.dokumentum-kartya:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 25px rgba(0, 0, 0, 0.11);
+}
+
+
+
+.dokumentum-ikon {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.pdf-ikon {
+    background-color: #e30613;
+}
+
+.word-ikon {
+    background-color: #2563a6;
+}
+
+
+.dokumentum-kartya h2 {
+    margin-bottom: 12px;
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+.dokumentum-kartya p {
+    margin-bottom: 25px;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+
+.dokumentum-gombok {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.dokumentum-gomb {
+    display: inline-block;
+    padding: 12px 20px;
+    border: 1px solid #e30613;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease;
+}
+
+.megnyitas {
+    background-color: #e30613;
+    color: #fff;
+}
+
+.megnyitas:hover {
+    background-color: #b9000b;
+}
+
+.letoltes {
+    background-color: #fff;
+    color: #e30613;
+}
+
+.letoltes:hover {
+    background-color: #fff0f0;
+}
+
+/* Mobilnézet */
+
+@media (max-width: 700px) {
+    .dokumentumok-oldal {
+        padding: 30px 18px 45px;
+    }
+
+    .dokumentumok-oldal h1 {
+        font-size: 31px;
+    }
+
+    .dokumentumok-racs {
+        grid-template-columns: 1fr;
+    }
+
+    .dokumentum-kartya {
+        padding: 24px;
+    }
+}
