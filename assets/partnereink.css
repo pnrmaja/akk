@@ -1,7 +1,57 @@
 /* ==========================================================================
    assets/partnereink.css
-   A Partnereink oldal (partnereink.php) rácsos kártyalistájának stílusa.
+   A Partnereink oldal (partnereink.php) stílusa: a listaválasztó
+   (partnercégek / partneriskolák) és a rácsos kártyalista.
    ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Listaválasztó: Partnercégek / Partneriskolák
+   A Szakmáink szűrősávjához hasonló megjelenés (assets/szakmaink.css,
+   .varos-nav); az éppen látható lista gombja ('aktiv') kiemelt.
+   -------------------------------------------------------------------------- */
+
+.partner-valaszto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+.partner-valaszto a {
+    display: inline-block;
+    padding: 11px 20px;
+    border: 1px solid #e5d8da;
+    border-radius: 25px;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.partner-valaszto a:hover {
+    border-color: #b70d1b;
+    background: #fff1f2;
+    color: #9b101b;
+    transform: translateY(-2px);
+}
+
+.partner-valaszto a.aktiv {
+    border-color: #b70d1b;
+    background: #b70d1b;
+    color: #fff;
+    font-weight: 700;
+}
+
+.partner-valaszto a:focus-visible {
+    outline: 3px solid #f0a000;
+    outline-offset: 3px;
+}
 
 
 /* --------------------------------------------------------------------------
@@ -57,11 +107,31 @@
 
 
 /* --------------------------------------------------------------------------
-   Reszponzív nézet: telefonon egy oszlop
+   Reszponzív nézet: telefonon egy oszlop, kisebb választógombok
    -------------------------------------------------------------------------- */
 
 @media (max-width: 700px) {
     .partnerek {
         grid-template-columns: 1fr;
+    }
+
+    .partner-valaszto a {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   Csökkentett mozgás: a választógombok nem animálódnak
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .partner-valaszto a {
+        transition: none;
+    }
+
+    .partner-valaszto a:hover {
+        transform: none;
     }
 }
