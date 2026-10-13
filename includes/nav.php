@@ -38,7 +38,6 @@ function menu_adatok(): array
         ['label' => 'Rólunk', 'children' => [
             ['label' => 'Bemutatkozás',    'href' => 'bemutatkozas.php'],
             ['label' => 'Duális képzés',   'href' => 'dualisKepzes.php'],
-            ['label' => 'Képzőközpontunk', 'href' => '#'], // Még nincs hozzá oldal
         ]],
 
         
