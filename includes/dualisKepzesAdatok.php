@@ -25,7 +25,11 @@ return [
 
     [
         "cim" => "Vállalati partnerek",
-        "szoveg" => "A duális képzés megvalósításában a Képzőközpont mellett a duális képzésben jártas partnercégek is részt vesznek. A tanulók a partnercégek telephelyein, valós munkakörnyezetben szerezhetnek szakmai tapasztalatot."
+        "szoveg" => "A duális képzés megvalósításában a Képzőközpont mellett a duális képzésben jártas partnercégek is részt vesznek. A tanulók a partnercégek telephelyein, valós munkakörnyezetben szerezhetnek szakmai tapasztalatot.",
+        "link" => [
+            "href" => "partnereink.php",
+            "felirat" => "Partnereink"
+        ]
     ],
 
     [

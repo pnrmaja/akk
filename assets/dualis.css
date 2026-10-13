@@ -56,6 +56,18 @@
 }
 
 
+.informacio-link {
+    color: #e30613;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.informacio-link:hover {
+    text-decoration: underline;
+}
+
+
 /* --------------------------------------------------------------------------
    Reszponzív nézet (tablet és telefon)
    -------------------------------------------------------------------------- */

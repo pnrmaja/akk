@@ -25,11 +25,16 @@ require __DIR__ . '/includes/header.php';
         <section class="informacio">
 
             <h2>
-                <?= htmlspecialchars($elem["cim"]) ?>
+                <?= e($elem["cim"]) ?>
             </h2>
 
             <p>
-                <?= htmlspecialchars($elem["szoveg"]) ?>
+                <?= e($elem["szoveg"]) ?>
+                <?php if (!empty($elem["link"])): ?>
+                    <a class="informacio-link" href="<?= e($elem["link"]["href"]) ?>">
+                        <?= e($elem["link"]["felirat"]) ?> &rarr;
+                    </a>
+                <?php endif; ?>
             </p>
 
         </section>

@@ -14,7 +14,7 @@ require __DIR__ . '/includes/header.php';
 
     <h1>Szalézi Ágazati Képzőközpont</h1>
 
-    <h2>Gyakorlati helyet keresel?</h2>
+    <h2 class="fekete">Gyakorlati helyet keresel?</h2>
 
     <p>
         Szülőként fontos számodra gyermeked szakmai jövője?
