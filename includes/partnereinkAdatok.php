@@ -24,14 +24,6 @@ return [
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
-        'nev' => 'Invitech',
-        'url' => 'https://www.invitech.hu/'
-    ],
-    [
-        'nev' => 'Herman Ottó Intézet Nonprofit Kft.',
-        'url' => 'https://www.hermanottointezet.hu/'
-    ],
-    [
         'nev' => 'Lanmen Informatika Kft.',
         'url' => 'https://lanmen.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
@@ -40,18 +32,6 @@ return [
         'nev' => 'Benkő István Református Általános Iskola és Gimnázium',
         'url' => 'https://benkorefi.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
-    ],
-    [
-        'nev' => 'Nemzeti Élelmiszerlánc-biztonsági Hivatal',
-        'url' => 'https://portal.nebih.gov.hu/'
-    ],
-    [
-        'nev' => 'ACE Network Zrt.',
-        'url' => 'https://acenet.tech/'
-    ],
-    [
-        'nev' => 'Tree Rendszerház Kft.',
-        'url' => null
     ],
     [
         'nev' => 'NeO Rendszerház Kft.',
@@ -64,45 +44,9 @@ return [
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
     ],
     [
-        'nev' => 'PaGeTo IT Kft.',
-        'url' => null
-    ],
-    [
-        'nev' => 'Poli Computer PC Kft.',
-        'url' => 'https://www.policomputer.hu/'
-    ],
-    [
-        'nev' => 'Prémium Egészségpénztár',
-        'url' => 'https://premiumegeszsegpenztar.hu/'
-    ],
-    [
-        'nev' => 'NISZ Zrt.',
-        'url' => 'https://nisz.hu/'
-    ],
-    [
-        'nev' => 'Budapest Gyógyfürdői és Hévizei Zrt.',
-        'url' => 'https://www.budapestgyogyfurdoi.hu/'
-    ],
-    [
-        'nev' => 'FLORCONTROLL-SERVICE Kft.',
-        'url' => null
-    ],
-    [
         'nev' => 'SZÁMALK-Szalézi Technikum és Szakgimnázium',
         'url' => 'https://www.szamalk-szalezi.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
-    ],
-    [
-        'nev' => 'MOL Campus',
-        'url' => 'https://www.molcampus.hu/'
-    ],
-    [
-        'nev' => 'Német Nemzetiségi Gimnázium és Kollégium',
-        'url' => 'https://nemetiskola.hu/'
-    ],
-    [
-        'nev' => 'Prompt',
-        'url' => 'https://www.prompt.hu/'
     ],
     [
         'nev' => 'Mária Rádió Közhasznú Egyesület',
@@ -118,14 +62,6 @@ return [
         'nev' => 'Apor Vilmos Katolikus Főiskola',
         'url' => 'https://avkf.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
-    ],
-    [
-        'nev' => 'FOXPOST',
-        'url' => 'https://foxpost.hu/'
-    ],
-    [
-        'nev' => 'Pasaréti Közösségi Ház',
-        'url' => 'https://pasaretikozossegihaz.hu/'
     ],
     [
         'nev' => 'Mátyás-templom',
@@ -159,7 +95,8 @@ return [
     ],
     [
         'nev' => 'Visit Esztergom-Budapest',
-        'url' => 'https://www.visitesztergom-budapest.hu/'
+        'url' => 'https://www.visitesztergom-budapest.hu/',
+        'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'All4Office',
@@ -376,4 +313,70 @@ return [
         'url' => null,
         'szakmak' => ['Mechatronikai technikus']
     ]
+
+    //ideiglenesen kikommentezve aamíg a kategória nincsen hozzájuk
+    /*[
+        'nev' => 'Nemzeti Élelmiszerlánc-biztonsági Hivatal',
+        'url' => 'https://portal.nebih.gov.hu/'
+    ],
+    [
+        'nev' => 'ACE Network Zrt.',
+        'url' => 'https://acenet.tech/'
+    ],
+    [
+        'nev' => 'Tree Rendszerház Kft.',
+        'url' => null
+    ],
+    [
+        'nev' => 'FOXPOST',
+        'url' => 'https://foxpost.hu/'
+    ],
+    [
+        'nev' => 'Pasaréti Közösségi Ház',
+        'url' => 'https://pasaretikozossegihaz.hu/'
+    ],
+    [
+        'nev' => 'MOL Campus',
+        'url' => 'https://www.molcampus.hu/'
+    ],
+    [
+        'nev' => 'Német Nemzetiségi Gimnázium és Kollégium',
+        'url' => 'https://nemetiskola.hu/'
+    ],
+    [
+        'nev' => 'Prompt',
+        'url' => 'https://www.prompt.hu/'
+    ],
+    [
+        'nev' => 'PaGeTo IT Kft.',
+        'url' => null
+    ],
+    [
+        'nev' => 'Poli Computer PC Kft.',
+        'url' => 'https://www.policomputer.hu/'
+    ],
+    [
+        'nev' => 'Prémium Egészségpénztár',
+        'url' => 'https://premiumegeszsegpenztar.hu/'
+    ],
+    [
+        'nev' => 'NISZ Zrt.',
+        'url' => 'https://nisz.hu/'
+    ],
+    [
+        'nev' => 'Budapest Gyógyfürdői és Hévizei Zrt.',
+        'url' => 'https://www.budapestgyogyfurdoi.hu/'
+    ],
+    [
+        'nev' => 'FLORCONTROLL-SERVICE Kft.',
+        'url' => null
+    ],
+    [
+        'nev' => 'Invitech',
+        'url' => 'https://www.invitech.hu/'
+    ],
+    [
+        'nev' => 'Herman Ottó Intézet Nonprofit Kft.',
+        'url' => 'https://www.hermanottointezet.hu/'
+    ],*/
 ];
