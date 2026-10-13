@@ -1,0 +1,286 @@
+
+.szakmaink-bevezeto {
+    max-width: 750px;
+    margin: 0 auto 28px;
+    color: #555;
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.varos-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+.varos-nav a {
+    display: inline-block;
+    padding: 11px 20px;
+    border: 1px solid #e5d8da;
+    border-radius: 25px;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.varos-nav a:hover {
+    border-color: #b70d1b;
+    background: #fff1f2;
+    color: #9b101b;
+    transform: translateY(-2px);
+}
+
+.varos-nav a.aktiv {
+    border-color: #b70d1b;
+    background: #b70d1b;
+    color: #fff;
+    font-weight: 700;
+}
+
+.talalatok-szama {
+    margin: 30px 0 18px;
+    color: #666;
+    font-size: 14px;
+}
+
+
+#kepzesek {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+    margin: 20px 0 40px;
+}
+
+
+.kepzes-kartya {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.045);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+}
+
+.kepzes-kartya:hover {
+    transform: translateY(-5px);
+    border-color: #e5b7bc;
+    box-shadow: 0 12px 28px rgba(80, 0, 0, 0.12);
+}
+
+.kepzes-kep-link {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 190px;
+    background: #f4eeee;
+}
+
+.kepzes-kep {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+}
+
+.kepzes-kartya:hover .kepzes-kep {
+    transform: scale(1.05);
+}
+
+.kepzes-tartalom {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+}
+
+
+.kepzes-kartya h2 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.kepzes-kartya h2 a {
+    color: #8f101c;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.kepzes-kartya h2 a:hover {
+    color: #e30613;
+    text-decoration: underline;
+}
+
+.kepzes-kartya p {
+    margin: 0 0 10px;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.kepzes-kartya p strong,
+.kepzes-szakmairanyok > strong {
+    color: #333;
+}
+
+
+.kepzes-kartya .kepzes-agazat {
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fff3f3;
+    color: #8f101c;
+}
+
+.kepzes-szakmairanyok {
+    margin-top: 8px;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.szakmairanyok {
+    margin: 8px 0 12px;
+    padding-left: 20px;
+}
+
+.szakmairanyok li {
+    margin-bottom: 5px;
+}
+
+
+.kepzes-kartya .alkalmassagi {
+    margin: 12px 0;
+    padding: 12px;
+    border-left: 4px solid #e0a020;
+    border-radius: 5px;
+    background: #fff8e8;
+    color: #79520a;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.reszletek-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 16px;
+    color: #b70d1b;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.reszletek-link:hover {
+    color: #e30613;
+    text-decoration: underline;
+}
+
+.reszletek-link span {
+    transition: transform 0.2s ease;
+}
+
+.reszletek-link:hover span {
+    transform: translateX(4px);
+}
+
+.nincs-talalat {
+    grid-column: 1 / -1;
+    padding: 35px 20px;
+    border: 1px dashed #d8c4c6;
+    border-radius: 12px;
+    background: #fffafa;
+    color: #666;
+    text-align: center;
+    line-height: 1.7;
+}
+
+
+.varos-nav a:focus-visible,
+.kepzes-kartya a:focus-visible {
+    outline: 3px solid #f0a000;
+    outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+    #kepzesek {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .kepzes-kep-link {
+        height: 180px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    #kepzesek {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .szakmaink-bevezeto {
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .varos-nav {
+        justify-content: flex-start;
+        gap: 8px;
+        margin: 16px 0;
+    }
+
+    .varos-nav a {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .kepzes-kep-link {
+        height: 220px;
+    }
+
+    .kepzes-tartalom {
+        padding: 18px;
+    }
+
+    .kepzes-kartya h2 {
+        font-size: 19px;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .kepzes-kartya,
+    .kepzes-kep,
+    .varos-nav a,
+    .reszletek-link span {
+        transition: none;
+    }
+
+    .kepzes-kartya:hover,
+    .varos-nav a:hover {
+        transform: none;
+    }
+}
