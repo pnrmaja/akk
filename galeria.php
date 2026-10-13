@@ -1,100 +1,181 @@
 <?php
 /**
- * galeria.php - Galéria (termeink)
- *
- * Képlapozó: a képek az assets/galeria/ mappában vannak, a megjelenítés
- * sorrendje a $kepek tömb sorrendje. A lapozó JavaScript az oldal alján
- * van; 5 másodpercenként automatikusan is lapoz.
+ * galeria.php - Galéria
+ * Külön galéria az AKK termeinek és a Fényes Adolf utcai telephelynek.
  */
 
-$oldalCim = 'Galéria';
-$oldalCss = 'assets/galeria.css'; // Oldalspecifikus stílus
+$oldalCim = 'Galéria – Szalézi AKK';
+$oldalCss = 'assets/galeria.css';
 
-// A megjelenítendő képek fájlnevei (assets/galeria/)
-$kepek = [
-    '1-es terem.webp',
-    '2-es terem.webp',
-    '2-es terem1.webp',
-    '2-es terem2.webp',
-    '3-as terem.webp',
-    '3-as terem1.webp',
-    '3-as terem2.webp',
-    '4-es terem.webp',
-    '4-es terem1.webp',
-    '4-es terem2.webp',
-    '4-es terem3.webp',
-    '6-os terem.webp',
-    '6-os terem1.webp',
-    '6-os terem2.webp'
+$galeriak = [
+    [
+        'id' => 'akk',
+        'cim' => 'Szalézi Ágazati Képzőközpont',
+        'leiras' => 'Az AKK termei és oktatási környezete.',
+        'mappa' => 'assets/galeria/akk/',
+        'kepek' => [
+            'terem1-0.webp',
+            'terem1.webp',
+            'terem2-0.webp',
+            'terem2-1.webp',
+            'terem2-2.webp',
+            'terem2.webp',
+            'terem3-0.webp',
+            'terem3-1.webp',
+            'terem3-2.webp',
+            'terem3.webp',
+            'terem4-0.webp',
+            'terem4-1.webp',
+            'terem4-2.webp',
+            'terem4-3.webp',
+            'terem4.webp',
+            'terem5.webp',
+            'terem6-0.webp',
+            'terem6-1.webp',
+            'terem6-2.webp',
+            'terem6.webp',
+            'Ebédlő.webp',
+            'Rendszergazdai szoba.webp',
+            'Szoftveres szoba.webp',
+        ],
+    ],
+    [
+        'id' => 'fenyes-adolf',
+        'cim' => 'Fényes Adolf utcai telephely',
+        'leiras' => 'Pillants be a Fényes Adolf utcai telephely termeibe!',
+        'mappa' => 'assets/galeria/fenyes-adolf/',
+        'kepek' => [
+            'fenyes-adolf-1.webp',
+            'fenyes-adolf-2.webp',
+            'fenyes-adolf-3.webp',
+            'fenyes-adolf-4.webp',
+        ],
+    ],
 ];
 
 require __DIR__ . '/includes/header.php';
-
 ?>
 
-<h1>Termeink</h1>
+<div class="galeria-oldal">
 
-<div class="galeria">
+    <h1>Galéria</h1>
 
-    <!-- Előző kép -->
-    <button class="galeria-gomb balra" onclick="elozoKep()">&#10094;</button>
+    <p class="galeria-bevezeto">
+        Ismerd meg képzési helyszíneinket és termeinket!
+    </p>
 
-    <!-- Képek: egyszerre csak az 'aktiv' osztályú látszik -->
-    <div class="galeria-kep">
-        <?php foreach ($kepek as $index => $kep): ?>
-            <img
-                src="assets/galeria/<?= rawurlencode($kep) ?>"
-                alt="Terem <?= $index + 1 ?>"
-                class="<?= $index === 0 ? 'aktiv' : '' ?>"
+    <?php foreach ($galeriak as $galeria): ?>
+
+        <section
+            class="helyszin-galeria"
+            aria-labelledby="cim-<?= e($galeria['id']) ?>"
+        >
+
+            <h2 id="cim-<?= e($galeria['id']) ?>">
+                <?= e($galeria['cim']) ?>
+            </h2>
+
+            <p class="helyszin-leiras">
+                <?= e($galeria['leiras']) ?>
+            </p>
+
+            <div
+                class="helyszin-lapozo"
+                data-galeria="<?= e($galeria['id']) ?>"
             >
-        <?php endforeach; ?>
-    </div>
 
-    <!-- Következő kép -->
-    <button class="galeria-gomb jobbra" onclick="kovetkezoKep()">&#10095;</button>
+                <button
+                    type="button"
+                    class="helyszin-gomb balra"
+                    aria-label="Előző kép"
+                >&#10094;</button>
+
+                <div class="helyszin-kepek">
+
+                    <?php foreach ($galeria['kepek'] as $index => $kep): ?>
+
+                        <img
+                            src="<?= e($galeria['mappa'] . rawurlencode($kep)) ?>"
+                            alt="<?= e($galeria['cim']) ?> – <?= $index + 1 ?>. kép"
+                            class="helyszin-kep <?= $index === 0 ? 'aktiv' : '' ?>"
+                            loading="<?= $index === 0 ? 'eager' : 'lazy' ?>"
+                        >
+
+                    <?php endforeach; ?>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="helyszin-gomb jobbra"
+                    aria-label="Következő kép"
+                >&#10095;</button>
+
+                <div class="helyszin-szamlalo" aria-live="polite">
+                    1 / <?= count($galeria['kepek']) ?>
+                </div>
+
+            </div>
+
+        </section>
+
+    <?php endforeach; ?>
 
 </div>
 
 <script>
-// Az éppen megjelenített kép indexe
-let aktualisKep = 0;
+document.querySelectorAll('.helyszin-lapozo').forEach(galeria => {
+    const kepek = galeria.querySelectorAll('.helyszin-kep');
+    const elozo = galeria.querySelector('.balra');
+    const kovetkezo = galeria.querySelector('.jobbra');
+    const szamlalo = galeria.querySelector('.helyszin-szamlalo');
 
-// Az összes kép elem a lapozóban
-const kepek = document.querySelectorAll('.galeria-kep img');
+    if (kepek.length === 0) {
+        return;
+    }
 
-// Megjeleníti a megadott indexű képet, a többit elrejti
-function mutatKep(index) {
-    kepek.forEach(kep => {
-        kep.classList.remove('aktiv');
+    let aktualis = 0;
+    let automatikusLapozas;
+
+    function mutatKep(index) {
+        kepek[aktualis].classList.remove('aktiv');
+
+        aktualis = (index + kepek.length) % kepek.length;
+
+        kepek[aktualis].classList.add('aktiv');
+        szamlalo.textContent =
+            `${aktualis + 1} / ${kepek.length}`;
+    }
+
+    function inditAutomatikusLapozast() {
+        clearInterval(automatikusLapozas);
+
+        automatikusLapozas = setInterval(() => {
+            mutatKep(aktualis + 1);
+        }, 5000);
+    }
+
+    elozo.addEventListener('click', () => {
+        mutatKep(aktualis - 1);
+        inditAutomatikusLapozast();
     });
 
-    kepek[index].classList.add('aktiv');
-}
+    kovetkezo.addEventListener('click', () => {
+        mutatKep(aktualis + 1);
+        inditAutomatikusLapozast();
+    });
 
-// Következő kép; az utolsó után visszaugrik az elsőre
-function kovetkezoKep() {
-    aktualisKep++;
+    galeria.addEventListener('mouseenter', () => {
+        clearInterval(automatikusLapozas);
+    });
 
-    if (aktualisKep >= kepek.length) {
-        aktualisKep = 0;
-    }
+    galeria.addEventListener(
+        'mouseleave',
+        inditAutomatikusLapozast
+    );
 
-    mutatKep(aktualisKep);
-}
-
-// Előző kép; az első előtt az utolsóra ugrik
-function elozoKep() {
-    aktualisKep--;
-
-    if (aktualisKep < 0) {
-        aktualisKep = kepek.length - 1;
-    }
-
-    mutatKep(aktualisKep);
-}
-
-// Automatikus lapozás 5 másodpercenként
-setInterval(kovetkezoKep, 5000);
+    inditAutomatikusLapozast();
+});
 </script>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

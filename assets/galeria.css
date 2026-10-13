@@ -1,97 +1,223 @@
-/* ==========================================================================
-   assets/galeria.css
-   A Galéria oldal (galeria.php) képlapozójának stílusa.
-   ========================================================================== */
 
-
-/* --------------------------------------------------------------------------
-   Lapozó elrendezés: [előző gomb] [kép] [következő gomb]
-   -------------------------------------------------------------------------- */
-
-.galeria {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
+.galeria-oldal {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 45px 25px 70px;
 }
 
-/* A kép keretezett megjelenítő mezője */
-.galeria-kep {
-    width: 800px;
-    height: 500px;
+/* Főcím */
+
+.galeria-oldal > h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+    color: #171717;
+    letter-spacing: -0.5px;
+}
+
+.galeria-bevezeto {
+    font-size: 17px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 45px;
+}
+
+/* Külön galériák */
+
+.helyszin-galeria {
+    margin-bottom: 55px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.06);
+}
+
+.helyszin-galeria h2 {
+    font-size: 26px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    padding-left: 16px;
+    border-left: 5px solid #e30613;
+    color: #171717;
+}
+
+.helyszin-leiras {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Képlapozó */
+
+.helyszin-lapozo {
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding-bottom: 35px;
+}
+
+.helyszin-kepek {
+    width: 100%;
+    height: 550px;
+    position: relative;
     overflow: hidden;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fff;
+    border-radius: 12px;
+    background: #f3f3f3;
 }
 
-
-/* --------------------------------------------------------------------------
-   Képek: csak az 'aktiv' osztályú látszik
-   -------------------------------------------------------------------------- */
-
-.galeria-kep img {
+.helyszin-kep {
     display: none;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    background: #f3f3f3;
 }
 
-.galeria-kep img.aktiv {
+.helyszin-kep.aktiv {
     display: block;
+    animation: galeriaMegjelenes 0.35s ease;
 }
 
+/* Képváltás animációja */
 
-/* --------------------------------------------------------------------------
-   Lapozó gombok
-   -------------------------------------------------------------------------- */
+@keyframes galeriaMegjelenes {
+    from {
+        opacity: 0.5;
+    }
 
-.galeria-gomb {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Lapozógombok */
+
+.helyszin-gomb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-65%);
+    z-index: 2;
+    width: 48px;
+    height: 48px;
     border: none;
-    background-color: #eee;
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
-    font-size: 30px;
+    background: #fff;
+    color: #e30613;
+    font-size: 22px;
     cursor: pointer;
-    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
 }
 
-.galeria-gomb:hover {
-    background-color: #ccc;
+.helyszin-gomb.balra {
+    left: 15px;
 }
 
+.helyszin-gomb.jobbra {
+    right: 15px;
+}
 
-/* --------------------------------------------------------------------------
-   Reszponzív nézetek
-   -------------------------------------------------------------------------- */
+.helyszin-gomb:hover {
+    background: #e30613;
+    color: #fff;
+    transform: translateY(-65%) scale(1.08);
+}
 
-/* Tablet */
+.helyszin-gomb:focus-visible {
+    outline: 3px solid #e30613;
+    outline-offset: 3px;
+}
+
+/* Képszámláló */
+
+.helyszin-szamlalo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 7px 15px;
+    border-radius: 20px;
+    background: #f1f1f1;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
 @media (max-width: 900px) {
-    .galeria-kep {
-        width: 90vw;
-        height: 60vw;
+    .galeria-oldal {
+        padding: 35px 20px 50px;
     }
 
-    .galeria-gomb {
-        width: 40px;
-        height: 40px;
-        font-size: 22px;
+    .helyszin-galeria {
+        padding: 22px;
+    }
+
+    .helyszin-kepek {
+        height: 430px;
     }
 }
 
-/* Telefon */
+/* =========================================
+   MOBIL
+   ========================================= */
+
 @media (max-width: 600px) {
-    .galeria {
-        gap: 8px;
+    .galeria-oldal {
+        padding: 25px 15px 40px;
     }
 
-    .galeria-kep {
-        width: 80vw;
-        height: 60vw;
+    .galeria-oldal > h1 {
+        font-size: 30px;
+    }
+
+    .galeria-bevezeto {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .helyszin-galeria {
+        padding: 16px;
+        margin-bottom: 30px;
+        border-radius: 12px;
+    }
+
+    .helyszin-galeria h2 {
+        font-size: 21px;
+    }
+
+    .helyszin-leiras {
+        font-size: 14px;
+    }
+
+    .helyszin-lapozo {
+        min-height: 240px;
+    }
+
+    .helyszin-kepek {
+        height: 280px;
+        border-radius: 8px;
+    }
+
+    .helyszin-gomb {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .helyszin-gomb.balra {
+        left: 8px;
+    }
+
+    .helyszin-gomb.jobbra {
+        right: 8px;
     }
 }
