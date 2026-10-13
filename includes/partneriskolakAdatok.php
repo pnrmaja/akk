@@ -26,37 +26,37 @@ declare(strict_types=1);
 return [
     [
         'nev' => 'BMSZC Bláthy Ottó Titusz Informatikai Technikum',
-        'url' => null,
+        'url' => 'https://blathy.bmszc.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'BMSZC Puskás Tivadar Távközlési és Informatikai Technikum',
-        'url' => null,
+        'url' => 'https://www.puskas.hu/100/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'BMSZC Than Károly Technikum és Szakképző Iskola Wesselényi Miklós Telephelye',
-        'url' => null,
+        'url' => 'https://wesselenyi.bmszc.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Elektronikai technikus']
     ],
     [
         'nev' => 'BMSZC Egressy Gábor Két Tanítási Nyelvű Technikum',
-        'url' => null,
+        'url' => 'https://egressy.bmszc.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Elektronikai technikus']
     ],
     [
         'nev' => 'BMSZC Pataky István Híradásipari és Informatikai Technikum',
-        'url' => null,
+        'url' => 'https://www.pataky.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
     ],
     [
         'nev' => 'BMSZC Trefort Ágoston Két Tanítási Nyelvű Technikum',
-        'url' => null,
+        'url' => 'https://trefort.bmszc.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Elektronikai technikus']
     ],
     [
         'nev' => 'BMSZC Újpesti Két Tanítási Nyelvű Műszaki Technikum',
-        'url' => null,
+        'url' => 'https://edir.umszki.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Elektronikai technikus']
     ],
     [
@@ -69,63 +69,63 @@ return [
         ]
     ],
     [
-        'nev' => 'BGéSZC Eötvös Loránd Technikum',
-        'url' => null,
+        'nev' => 'BGSZC Eötvös Loránd Technikum',
+        'url' => 'https://www.eotvosszki.hu/',
         'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Mechatronikai technikus']
     ],
     [
         'nev' => 'BMSZC Neumann János Informatikai Technikum',
-        'url' => null,
+        'url' => 'https://neumann.bmszc.hu/',
         'szakmak' => ['Szoftverfejlesztő és -tesztelő']
     ],
     [
         'nev' => 'META – Don Bosco Technikum és Szakgimnázium',
-        'url' => null,
+        'url' => 'https://metakepzes.hu/?gad_source=1&gad_campaignid=20738501036&gbraid=0AAAAABrNwA9scxtc5smjlM640FNFhLgws&gclid=CjwKCAjwrbfWBhAeEiwAc2e6PipxQfTWGyQisHsQtg4_0-EAUknwpJeOzDpQtMkZcrKAkJ9F9_ODiBoC2lwQAvD_BwE',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'BKSZC Gundel Károly Vendéglátó és Turisztikai Technikum',
-        'url' => null,
+        'url' => 'https://gundeliskola.hu/',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'BGSZC Pesterzsébeti Technikum',
-        'url' => null,
+        'url' => 'https://pekszi.hu/',
         'szakmak' => ['Turisztikai technikus']
     ],
     [
         'nev' => 'BGSZC Teleki Blanka Közgazdasági Technikum',
-        'url' => null,
+        'url' => 'https://telekiblankabp.hu/',
         'szakmak' => ['Turisztikai technikus', 'Logisztikai technikus']
     ],
     [
         'nev' => 'BGSZC Keleti Károly Közgazdasági Technikum',
-        'url' => null,
+        'url' => 'https://keletiszki.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'BGSZC Logisztikai és Kereskedelmi Technikum és Szakképző Iskola',
-        'url' => null,
+        'url' => 'https://logiker.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
     [
         'nev' => 'Váci SZC Király Endre Technikum és Szakképző Iskola',
-        'url' => null,
+        'url' => 'https://kiralyendre.hu/',
         'szakmak' => ['Villanyszerelő']
     ],
     [
         'nev' => 'BGéSZC Mechatronikai Technikum',
-        'url' => null,
+        'url' => 'https://mechatronika.hu/',
         'szakmak' => ['Elektronikai technikus']
     ],
     [
         'nev' => 'BMSZC Bolyai János Műszaki Technikum és Kollégium',
-        'url' => null,
+        'url' => 'https://bolyai-bp.edu.hu/',
         'szakmak' => ['Elektronikai technikus', 'Ipari informatikai technikus']
     ],
     [
         'nev' => 'Kaesz Gyula Faipari Technikum és Szakképző Iskola',
-        'url' => null,
+        'url' => 'https://kaesz.hu/',
         'szakmak' => ['Faipar (asztalos, kárpitos)']
     ],
 ];
