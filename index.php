@@ -43,7 +43,7 @@ require __DIR__ . '/includes/header.php';
 
         <div>
             <strong>A vállalkozásoknak</strong>
-            <span>utánpótlás.</span>
+            <span>munkaerő.</span>
         </div>
 
     </div>
@@ -52,10 +52,12 @@ require __DIR__ . '/includes/header.php';
 
 
 <!-- Tájékoztató: az oldal még fejlesztés alatt áll (magyarul és angolul) -->
+<!--
 <p class="fejlesztes">
     A weboldal még fejlesztés alatt áll.<br>
     <span lang="en">This website is still under development.</span>
 </p>
+-->
 
 
 <!-- Térkép: a képzőközpont címe (1044 Budapest, Váci út 73.) -->

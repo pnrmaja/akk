@@ -308,14 +308,29 @@ return [
         'url' => 'https://kontenersitt.hu/',
         'szakmak' => ['Logisztikai technikus']
     ],
+    
+    [
+        'nev' => 'MOL Campus',
+        'url' => 'https://www.molcampus.hu/',
+        'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus', 'Szoftverfejlesztő és -tesztelő']
+    ],
+
+    [
+        'nev' => 'Budapest Gyógyfürdői és Hévizei Zrt.',
+        'url' => 'https://www.budapestgyogyfurdoi.hu/',
+        'szakmak' => ['Informatikai rendszer- és alkalmazás-üzemeltető technikus']
+    ],
+
+
+
+    //ideiglenesen kikommentezve aamíg a kategória nincsen hozzájuk
+    /*
     [
         'nev' => 'RESRG Automotive HU Kft.',
         'url' => 'https://www.facebook.com/wujhartyan/',
         'szakmak' => ['Mechatronikai technikus']
     ],
-
-    //ideiglenesen kikommentezve aamíg a kategória nincsen hozzájuk
-    /*[
+    [
         'nev' => 'Nemzeti Élelmiszerlánc-biztonsági Hivatal',
         'url' => 'https://portal.nebih.gov.hu/'
     ],
@@ -334,10 +349,6 @@ return [
     [
         'nev' => 'Pasaréti Közösségi Ház',
         'url' => 'https://pasaretikozossegihaz.hu/'
-    ],
-    [
-        'nev' => 'MOL Campus',
-        'url' => 'https://www.molcampus.hu/'
     ],
     [
         'nev' => 'Német Nemzetiségi Gimnázium és Kollégium',
@@ -364,10 +375,6 @@ return [
         'url' => 'https://nisz.hu/'
     ],
     [
-        'nev' => 'Budapest Gyógyfürdői és Hévizei Zrt.',
-        'url' => 'https://www.budapestgyogyfurdoi.hu/'
-    ],
-    [
         'nev' => 'FLORCONTROLL-SERVICE Kft.',
         'url' => null
     ],
@@ -378,5 +385,6 @@ return [
     [
         'nev' => 'Herman Ottó Intézet Nonprofit Kft.',
         'url' => 'https://www.hermanottointezet.hu/'
-    ],*/
+    ],
+    */
 ];
