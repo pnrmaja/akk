@@ -1,0 +1,296 @@
+/* ==========================================================================
+   assets/responsive.css
+   Egységes reszponzív szabályrendszer az egész weboldalhoz (telefon, tablet).
+   A header.php MINDEN más stíluslap UTÁN tölti be, ezért a törésponton belül
+   felülírja a style.css és az oldalspecifikus CSS-ek hasonló szabályait.
+
+   Töréspontok (az egész oldalon ezeket használjuk):
+     max-width: 900px  - tablet és kisebb: hamburger menü, 2 oszlopos rácsok
+     max-width: 600px  - telefon: 1 oszlop, kompakt térközök
+     max-width: 380px  - kis telefon: még szűkebb térközök
+   Fontos: a media query-k sorrendje számít (nagyobbtól a kisebb felé),
+   mert az azonos specificitású szabályok közül a később írt nyer.
+
+   Tartalom:
+     1. Mindenhol érvényes alapok
+     2. Hamburger menü (JavaScript nélkül, jelölőnégyzettel)
+     3. Tablet (max 900px)
+     4. Telefon (max 600px)
+     5. Kis telefon (max 380px)
+     6. Érintőképernyő: hover-emelés kikapcsolása
+     7. Fekvő telefon és csökkentett mozgás
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. MINDENHOL ÉRVÉNYES ALAPOK
+   ========================================================================== */
+
+/* A böngésző ne nagyítsa fel magától a szöveget fekvő tájolásnál */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* A képek és beágyazott elemek soha nem lóghatnak ki a tartalmi sávból */
+img, iframe, video { max-width: 100%; }
+
+/* Hosszú szavak, e-mail címek és URL-ek törjenek, ne szélesítsék az oldalt */
+main, .lablec { overflow-wrap: anywhere; }
+
+/* Képzéskártya: a style.css fix 300px-es szélessége rácsban hibás
+   (tabletnél balra tapad, kis telefonon kilóg), ezért a rács szabja meg */
+.kepzes-kartya { width: auto; }
+
+/* A hamburger menü vezérlői asztali nézetben nem léteznek */
+.menu-kapcsolo,
+.menu-gomb { display: none; }
+
+
+/* ==========================================================================
+   2. HAMBURGER MENÜ (header.php: #menu-kapcsolo + .menu-gomb + .menu-doboz)
+   JavaScript nélkül működik: a címke (.menu-gomb) átkapcsolja a rejtett
+   jelölőnégyzetet, a :checked állapot pedig megnyitja a .menu-doboz elemet.
+   A jelölőnégyzet csak vizuálisan rejtett, így billentyűzettel (Tab, Space)
+   is kezelhető.
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    nav { position: relative; }
+
+    /* Vizuálisan rejtett, de fókuszálható jelölőnégyzet */
+    .menu-kapcsolo {
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        opacity: 0;
+    }
+
+    /* A gomb: ez a címke látszik és erre lehet koppintani */
+    .menu-gomb {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 52px;
+        padding: 12px 20px;
+        border-bottom: 1px solid #e5e5e5;
+        background: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /* Nyíl a gomb jobb szélén: nyitva fölfelé, csukva lefelé mutat */
+    .menu-gomb::after { content: "▾"; }
+    .menu-kapcsolo:checked + .menu-gomb::after { content: "▴"; }
+
+    /* Billentyűzetes fókusz a (rejtett) jelölőnégyzeten a gombon látszik */
+    .menu-kapcsolo:focus-visible + .menu-gomb {
+        outline: 3px solid #f0a000;
+        outline-offset: -3px;
+    }
+
+    /* Csukva alapból, nyitva a jelölőnégyzet bejelölésekor */
+    .menu-doboz { display: none; }
+    .menu-kapcsolo:checked ~ .menu-doboz { display: block; }
+
+    /* Főmenü: egymás alatti, teljes szélességű sorok */
+    .menu { flex-direction: column; justify-content: flex-start; }
+    .menu > li > a {
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    /* Almenük: hover helyett mindig kinyitva, behúzva (érintésre nincs hover) */
+    .dropdown-menu,
+    .dropdown-submenu > .dropdown-menu {
+        display: block;
+        position: static;
+        min-width: 0;
+        background: #fafafa;
+        box-shadow: none;
+    }
+    .dropdown-menu li a {
+        padding: 13px 20px 13px 38px;
+        white-space: normal;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .dropdown-submenu > .dropdown-menu li a { padding-left: 56px; }
+}
+
+
+/* ==========================================================================
+   3. TABLET (max 900px)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    /* Partnerrács: 2 oszlop (a partnereink.css 3 oszlopról 700px-nél vált) */
+    .partnerek { grid-template-columns: repeat(2, 1fr); }
+
+    /* Szűrősávok és listaválasztó: kényelmes, ujjal célozható gombok */
+    .varos-nav a,
+    .partner-valaszto a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+}
+
+
+/* ==========================================================================
+   4. TELEFON (max 600px)
+   ========================================================================== */
+
+@media (max-width: 600px) {
+
+    /* ---- Oldalkeret ----
+       A main már ad oldalsó térközt, ezért az oldalspecifikus külső
+       keretek (kapcsolat, dokumentumok, galéria, duális) saját oldalsó
+       térköze elmarad, különben dupla margó venné el a helyet. */
+    main { padding: 14px; }
+
+    .kapcsolat-oldal,
+    .dokumentumok-oldal,
+    .galeria-oldal,
+    .dualis-oldal { padding: 12px 0 36px; }
+
+    /* ---- Fejléc-kép ---- */
+    .fejlec { height: 150px; }
+
+    /* ---- Főcímek: egységes méret minden oldalon ---- */
+    main h1,
+    .hero h1,
+    .reszletek > h1,
+    .dualis-oldal > h1,
+    .kapcsolat-oldal > h1,
+    .galeria-oldal > h1,
+    .dokumentumok-oldal h1 {
+        font-size: 26px;
+        line-height: 1.25;
+    }
+    main h1 { margin: 14px 0; }
+    .dualis-oldal > h1 { margin-bottom: 24px; }
+
+    /* ---- Szövegek: sorkizárás helyett balra igazítás ----
+       Keskeny sávban a sorkizárás rossz, nagy szóközöket csinál. */
+    main > p,
+    .reszletek p,
+    .informacio p {
+        text-align: left;
+        hyphens: manual;
+    }
+
+    /* ---- Kártyák: kisebb belső térköz ---- */
+    .kepzes-tartalom { padding: 16px; }
+    .kapcsolat-kartya,
+    .dokumentum-kartya { padding: 22px 18px; min-height: 0; }
+    .informacio { padding: 20px 16px; }
+    .helyszin-galeria { padding: 14px; }
+
+    /* ---- Rácsok: mindenhol egy oszlop ---- */
+    .partnerek { grid-template-columns: 1fr; }
+
+    /* ---- Főoldal ---- */
+    .hero { margin: 20px 0; padding: 30px 18px; border-radius: 16px; }
+    .hero::after { left: 18px; }
+    .terkep-szekcio { margin: 30px 0; padding: 16px; }
+    .terkep-szekcio iframe { height: 250px; }
+    .terkep-szekcio .terkep-link { display: block; }
+
+    /* ---- Szakma részletek ---- */
+    .reszletek-adatok { grid-template-columns: 1fr; padding: 16px; }
+    .reszletek ul { margin-left: 20px; }
+
+    /* ---- Dokumentumok: teljes szélességű gombok ---- */
+    .dokumentum-gomb {
+        flex: 1 1 100%;
+        padding: 14px 16px;
+    }
+
+    /* ---- Híreink lapozó ----
+       A fix 80vw + két gomb + térköz telefonon kilógott a képernyőről. */
+    .hirek { gap: 6px; }
+    .hir {
+        width: auto;
+        flex: 1 1 0;
+        min-width: 0;
+        height: 75vw;
+    }
+    .hirek-gomb { width: 40px; height: 40px; font-size: 20px; }
+    .hir-elem img { max-height: calc(100% - 48px); min-height: 0; }
+    .hir-elem h2 { margin-top: 8px; font-size: 16px; }
+
+    /* ---- Galéria lapozó ---- */
+    .helyszin-kepek { height: min(75vw, 320px); }
+
+    /* ---- Lábléc ---- */
+    .lablec { margin-top: 36px; }
+    .lablec-belso { padding: 28px 16px 20px; }
+    .lablec section { padding: 8px 0; }
+}
+
+
+/* ==========================================================================
+   5. KIS TELEFON (max 380px)
+   ========================================================================== */
+
+@media (max-width: 380px) {
+
+    main { padding: 12px; }
+
+    main h1,
+    .hero h1,
+    .reszletek > h1,
+    .dualis-oldal > h1,
+    .kapcsolat-oldal > h1,
+    .galeria-oldal > h1,
+    .dokumentumok-oldal h1 { font-size: 23px; }
+
+    .hero { padding: 26px 14px; }
+    .menu-gomb,
+    .menu > li > a { padding-left: 14px; padding-right: 14px; }
+    .varos-nav a,
+    .partner-valaszto a { padding: 10px 12px; font-size: 13px; }
+}
+
+
+/* ==========================================================================
+   6. ÉRINTŐKÉPERNYŐ
+   Érintésre a hover "beragad" a koppintás után, ezért az emelő és nagyító
+   hatások itt ki vannak kapcsolva.
+   ========================================================================== */
+
+@media (hover: none) {
+
+    .kepzes-kartya:hover,
+    .kapcsolat-kartya:hover,
+    .dokumentum-kartya:hover,
+    .kiemelt-szoveg div:hover,
+    .varos-nav a:hover,
+    .partner-valaszto a:hover { transform: none; }
+
+    .kepzes-kartya:hover .kepzes-kep { transform: none; }
+}
+
+
+/* ==========================================================================
+   7. FEKVŐ TELEFON ÉS CSÖKKENTETT MOZGÁS
+   ========================================================================== */
+
+/* Fekvő telefonon a magas fejléc-kép elvenné a képernyő nagy részét */
+@media (max-height: 500px) and (orientation: landscape) {
+    .fejlec { height: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

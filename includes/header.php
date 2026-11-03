@@ -8,6 +8,10 @@
  * Az oldalak a beillesztés ELŐTT ezeket a változókat állíthatják be:
  *   $oldalCim - a <title> tartalma (alapértelmezés: "Szalézi AKK")
  *   $oldalCss - opcionális, oldalspecifikus stíluslap elérési útja
+ *
+ * A mobil hamburger menü JavaScript nélkül működik: egy rejtett jelölőnégyzet
+ * (#menu-kapcsolo) és a hozzá tartozó címke (.menu-gomb) vezérli, a nyitást
+ * és zárást az assets/responsive.css végzi.
  */
 declare(strict_types=1);
 
@@ -34,6 +38,9 @@ $aktualis = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '
     <?php if (!empty($oldalCss)): ?>
     <link rel="stylesheet" href="<?= e($oldalCss) ?>">
     <?php endif; ?>
+
+    <!-- Egységes mobil/reszponzív szabályok: mindig az utolsó stíluslap -->
+    <link rel="stylesheet" href="assets/responsive.css">
 </head>
 <body>
     <!-- Fejléc-kép -->
@@ -41,9 +48,15 @@ $aktualis = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '
         <img src="assets/fejlec/fejlec.webp" alt="Szalézi Ágazati Képzőközpont">
     </header>
 
-    <!-- Főmenü (adatai: includes/nav.php) -->
-    <nav>
-        <?php menu_kirajzol(menu_adatok(), $aktualis); ?>
+    <!-- Főmenü (adatai: includes/nav.php).
+         Mobilon a jelölőnégyzet + címke nyitja a menüt (JavaScript nélkül). -->
+    <nav aria-label="Főmenü">
+        <input type="checkbox" id="menu-kapcsolo" class="menu-kapcsolo" aria-label="Menü megnyitása">
+        <label for="menu-kapcsolo" class="menu-gomb">☰ Menü</label>
+
+        <div class="menu-doboz">
+            <?php menu_kirajzol(menu_adatok(), $aktualis); ?>
+        </div>
     </nav>
 
 <!-- Az oldal tartalma; a záró </main> a footer.php-ban van -->

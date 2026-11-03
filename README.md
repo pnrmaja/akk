@@ -32,7 +32,7 @@ Fejlesztői szerver indítása a projekt gyökeréből:
 ├── galeria.php             – termek képlapozója
 ├── kapcsolat.php           – elérhetőségi kártyák
 ├── includes/
-│   ├── header.php               – <head>, fejléc-kép, <nav>, <main> nyitása
+│   ├── header.php               – <head>, fejléc-kép, <nav> (mobil menüvel), <main> nyitása
 │   ├── footer.php               – </main>, lábléc, </body>, </html>
 │   ├── nav.php                  – menüadatok + menü kirajzolása (rekurzív)
 │   ├── functions.php            – segédfüggvények: escape, adatbetöltés, szűrés, rendezés, URL-ek
@@ -44,6 +44,7 @@ Fejlesztői szerver indítása a projekt gyökeréből:
 │   └── kapcsolatAdatok.php      – a Kapcsolat oldal kártyái
 ├── assets/
 │   ├── style.css           – globális stílus (elrendezés, menü, kártyák, főoldal, lábléc)
+│   ├── responsive.css      – egységes mobil/tablet szabályok (mindig utolsóként töltődik)
 │   ├── dualis.css          – Duális képzés oldal
 │   ├── partnereink.css     – Partnereink oldal
 │   ├── hireink.css         – Híreink oldal
@@ -69,8 +70,8 @@ Az egész projekt egységesen, magyarul kommentezett.
 - **JavaScript (galéria, hírek):** soronként a függvények elé írt rövid
   megjegyzések.
 - **CSS-fájlok:** minden fájl elején fejlécblokk; a szakaszok
-  `/* --- … --- */` (oldalspecifikus) vagy `/* === … === */` (`style.css`)
-  vonalakkal vannak elválasztva.
+  `/* --- … --- */` (oldalspecifikus) vagy `/* === … === */` (`style.css`,
+  `responsive.css`) vonalakkal vannak elválasztva.
 - A kommentek **csak a viselkedést magyarázzák**, a kód működése nem függ
   tőlük.
 
@@ -96,6 +97,9 @@ require __DIR__ . '/includes/header.php';
 - `$oldalCss`, ha be van állítva, egy második `<link>`-ként kerül be a
   `assets/style.css` UTÁN, így felülírhatja azt egy adott oldalon
   (pl. `dualisKepzes.php` → `assets/dualis.css`).
+- A `header.php` a stíluslapok közül **utolsóként** mindig betölti az
+  `assets/responsive.css`-t, így az egységes mobilszabályok az
+  oldalspecifikus CSS-t is felülírják (lásd „Reszponzív nézet").
 - `header.php` betölti a `functions.php`-t és a `nav.php`-t, meghatározza
   `$oldalCim`-et (alapértelmezés: „Szalézi AKK") és `$aktualis`-t (az
   aktuális fájlnév a menü aktív állapotához), kiírja a fejléc-képet és a
@@ -105,6 +109,29 @@ require __DIR__ . '/includes/header.php';
 - Mivel a `functions.php` a `header.php`-n keresztül töltődik be, az oldal
   saját kódjában a segédfüggvényeket (pl. `partner_csoportok()`) a
   `require header.php` UTÁN lehet hívni.
+
+## Reszponzív nézet (`assets/responsive.css`)
+
+Egyetlen, minden oldalon érvényes szabályrendszer telefonokra és tabletekre.
+Az oldalspecifikus CSS-ek saját media query-jei mellette tovább működnek, de
+a törésponton belül a `responsive.css` az utolsó szó.
+
+- **Töréspontok az egész oldalon:** `900px` (tablet: hamburger menü, 2 oszlopos
+  rácsok), `600px` (telefon: 1 oszlop, kompakt térközök), `380px` (kis telefon).
+  Az új szabályokat ezekhez kell igazítani.
+- **Sorrend számít:** a media query-k nagyobbtól kisebb felé követik egymást,
+  mert azonos specificitásnál a később írt szabály nyer.
+- **Mobil menü JavaScript nélkül:** a `header.php` egy rejtett jelölőnégyzetet
+  (`#menu-kapcsolo`), egy címkét (`.menu-gomb`) és a menüt körülvevő
+  `.menu-doboz` elemet tartalmaz. A címke átkapcsolja a jelölőnégyzetet, a
+  `:checked` állapot pedig kinyitja a menüt – ehhez nem kell JS. A
+  jelölőnégyzet csak vizuálisan rejtett, így billentyűzettel is kezelhető.
+  Mobilon az almenük (Rólunk, települések) mindig kinyitva, behúzva látszanak.
+- **Érintés:** a `(hover: none)` eszközökön a kártyák hover-emelése ki van
+  kapcsolva, mert a hover koppintás után „beragadna".
+- Új oldalspecifikus külső keret (pl. `.valami-oldal` saját `padding`-gel)
+  esetén a `responsive.css` 4. szakaszában a telefonos oldalsó térközt is
+  érdemes nullázni, különben dupla margó keletkezik a `main` mellett.
 
 ## Menürendszer (`includes/nav.php`)
 
@@ -123,6 +150,8 @@ require __DIR__ . '/includes/header.php';
 - Új menüpont vagy almenü hozzáadása: csak a `menu_adatok()` tömbjét kell
   bővíteni, a renderelő logikát nem kell módosítani.
 - A „Képzőközpontunk" menüpont jelenleg `#`-re mutat (még nincs hozzá oldal).
+- A mobil hamburger menü a `header.php`-ban és a `responsive.css`-ben van
+  (lásd „Reszponzív nézet"); a `menu_kirajzol()` kimenete nem változott.
 
 ## Segédfüggvények (`includes/functions.php`)
 
@@ -237,7 +266,8 @@ egyéb (szűrők, menü, kártyalista) automatikusan frissül.
   szövegként (`null` érték).
 - A partnerek **ábécé sorrendben** jelennek meg (a `partner_csoportok()`
   rendezi őket), így az adatfájlokban a sorrend nem számít.
-- Rácsos elrendezés (3 oszlop, telefonon 1), stílus: `assets/partnereink.css`.
+- Rácsos elrendezés (3 oszlop, tableten 2, telefonon 1), stílus:
+  `assets/partnereink.css` és a `responsive.css`.
 - **Szakmák szerinti blokkok (jelenleg bekapcsolva, mindkét listánál):** a
   `partnereink.php` tetején a `$SZAKMANKENT` változó vezérli (`true` =
   blokkok, `false` = egyetlen, cím nélküli rács). A `szakmak` mező adja meg,
@@ -278,7 +308,8 @@ egyéb (szűrők, menü, kártyalista) automatikusan frissül.
   mezők jelenleg helyőrzők („Festő neve").
 - Mindkét oldal a saját JavaScriptjével lapoz (előző/következő gomb, a
   végén visszaugrik), és időzítővel automatikusan is léptet
-  (galéria: 5 mp, hírek: 4 mp).
+  (galéria: 5 mp, hírek: 4 mp). A lapozók tehát JavaScriptet igényelnek;
+  a menü és az oldal többi része nem.
 
 ## Stílusok
 
@@ -293,6 +324,10 @@ egyéb (szűrők, menü, kártyalista) automatikusan frissül.
   töltődnek): `dualis.css`, `partnereink.css`, `hireink.css`, `galeria.css`,
   `kapcsolat.css`, `reszletek.css`. Mindegyik reszponzív törésponttal
   rendelkezik (768 / 900 / 700 / 600 px, oldaltól függően).
+- `assets/responsive.css` – az egységes mobil/tablet szabályrendszer, a
+  `header.php` mindig a legutolsó stíluslapként tölti be (lásd „Reszponzív
+  nézet"). Ha egy oldalspecifikus media query ütközik vele, a
+  `responsive.css` nyer.
 
 ## Biztonsági megjegyzés
 
@@ -315,7 +350,8 @@ paraméterrel nem tölthető be tetszőleges fájl.
 | Új település | Csak egy új `varos` érték az adatok között – a szűrő és a menü automatikusan felveszi |
 | Új jogviszony-kategória a szűrőhöz | `includes/functions.php` – `jogviszony_tipusok()` és `jogviszony_illeszkedik()` bővítése |
 | Új statikus oldal | Új `.php` fájl a gyökérben, a header/footer mintát követve, + link a `nav.php`-ban |
-| Új menüpont/almenü | `includes/nav.php` – `menu_adatok()` tömbje |
+| Új menüpont/almenü | `includes/nav.php` – `menu_adatok()` tömbje (a mobil menü automatikusan követi) |
+| Mobil/tablet megjelenés módosítása | `assets/responsive.css` – a megfelelő töréspont (900 / 600 / 380 px) szakaszában |
 | Új „Duális képzés" infóblokk | `includes/dualisKepzesAdatok.php` – új elem |
 | Új partnercég | `includes/partnereinkAdatok.php` – új elem (a sorrend az ábécé szerint automatikus) |
 | Új partneriskola | `includes/partneriskolakAdatok.php` – új elem, ugyanazzal a szerkezettel (a sorrend automatikus) |
